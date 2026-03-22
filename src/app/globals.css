@@ -1,0 +1,320 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   HARMONIA DESIGN SYSTEM — CSS Variables
+   Extracted from harmoniaengine.com index.html
+   ============================================================ */
+
+:root {
+  /* Light Mode — Warm Parchment Base */
+  --cream: #FAF6F1;
+  --blush: #F5EDE6;
+  --rose: #EFE5DC;
+  --card-bg: #F0E8DF;
+
+  /* Accent Colors */
+  --gold: #D4A853;
+  --gold-light: rgba(212, 168, 83, 0.15);
+  --gold-champagne: #E8C97A;
+  --gold-rose: #D4A574;
+  --maroon: #722F37;
+  --maroon-deep: #5C1A1B;
+  --maroon-light: rgba(114, 47, 55, 0.12);
+  --wine: #8B3A3A;
+  --wine-light: rgba(139, 58, 58, 0.15);
+
+  /* Text */
+  --navy: #1E293B;
+  --slate: #475569;
+  --gray-light: #E8E0D8;
+
+  /* Dark mode surfaces */
+  --dark-bg: #12090A;
+  --dark-surface: #2D1A1C;
+  --dark-border: #3D2426;
+
+  /* Semantic */
+  --heart-empty: rgba(212, 168, 83, 0.2);
+  --heart-filled: #D4A853;
+  --heart-glow: rgba(212, 168, 83, 0.4);
+  --chemistry-strong: #4CAF50;
+  --chemistry-good: #FF9800;
+  --chemistry-some: #9E9E9E;
+
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-medium: 0.4s ease;
+  --transition-slow: 0.6s ease;
+}
+
+/* Dark Mode — Wine Black */
+.dark {
+  --cream: #12090A;
+  --blush: #1A0F10;
+  --rose: #EFE5DC;
+  --card-bg: #2D1A1C;
+  --gold: #F0C86E;
+  --gold-champagne: #F5D98A;
+  --gold-light: rgba(240, 200, 110, 0.2);
+  --navy: #F5F0E8;
+  --slate: #C4B8B0;
+  --gray-light: #2D1A1C;
+}
+
+/* ============================================================
+   BASE STYLES
+   ============================================================ */
+
+html {
+  overflow-x: hidden;
+  height: 100%;
+  height: -webkit-fill-available;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--navy);
+  overflow-x: hidden;
+  transition: background var(--transition-medium), color var(--transition-medium);
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+/* Text overflow handling (from index.html) */
+p, h1, h2, h3, h4, h5, h6, span, a, li {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+/* ============================================================
+   TYPOGRAPHY CLASSES
+   ============================================================ */
+
+.font-heading {
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.font-body {
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* ============================================================
+   HARMONIA COMPONENT PATTERNS (from index.html)
+   ============================================================ */
+
+/* Frosted glass navigation */
+.glass-nav {
+  background: rgba(250, 246, 241, 0.92);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(114, 47, 55, 0.1);
+  transition: background var(--transition-medium);
+}
+
+.dark .glass-nav {
+  background: rgba(26, 15, 16, 0.92);
+  border-bottom: 1px solid rgba(61, 36, 38, 0.5);
+  box-shadow: 0 4px 20px rgba(240, 200, 110, 0.08);
+}
+
+/* Card pattern */
+.harmonia-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  transition: box-shadow var(--transition-fast), transform var(--transition-fast);
+}
+
+.harmonia-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.dark .harmonia-card {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--dark-border);
+}
+
+/* Gold accent border (top of cards, from index.html partnership cards) */
+.gold-accent-top {
+  border-top: 3px solid var(--gold);
+}
+
+/* Primary button */
+.btn-harmonia-primary {
+  background: var(--gold);
+  color: var(--dark-bg);
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+
+.btn-harmonia-primary:hover {
+  background: var(--gold-champagne);
+  transform: translateY(-1px);
+}
+
+/* Secondary button */
+.btn-harmonia-secondary {
+  background: transparent;
+  color: var(--maroon);
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  border: 1.5px solid var(--maroon);
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.dark .btn-harmonia-secondary {
+  color: var(--gold);
+  border-color: var(--gold);
+}
+
+/* Form inputs */
+.harmonia-input {
+  background: var(--cream);
+  border: 1.5px solid var(--gray-light);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  color: var(--navy);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  width: 100%;
+}
+
+.harmonia-input:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px var(--gold-light);
+}
+
+.dark .harmonia-input {
+  background: var(--dark-surface);
+  border-color: var(--dark-border);
+  color: var(--navy);
+}
+
+/* Badge (from index.html "Testing Pool Open" badge) */
+.harmonia-badge {
+  display: inline-block;
+  background: var(--gold-light);
+  color: var(--gold);
+  font-weight: 600;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ============================================================
+   HEART ANIMATION SYSTEM
+   ============================================================ */
+
+.heart-icon {
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.heart-icon.empty {
+  color: var(--heart-empty);
+}
+
+.heart-icon.filled {
+  color: var(--heart-filled);
+  filter: drop-shadow(0 0 6px var(--heart-glow));
+}
+
+.heart-icon.filling {
+  animation: heartFill 0.5s ease-out forwards;
+}
+
+@keyframes heartFill {
+  0% { transform: scale(0.8); opacity: 0.5; }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* ============================================================
+   TOURNAMENT CARD SYSTEM
+   ============================================================ */
+
+.tournament-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.tournament-card:active {
+  transform: scale(0.98);
+}
+
+.tournament-card.selected {
+  animation: cardSelect 0.3s ease-out;
+  box-shadow: 0 0 20px var(--heart-glow);
+}
+
+@keyframes cardSelect {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+
+/* ============================================================
+   RADAR CHART THEME
+   ============================================================ */
+
+.radar-chart-container {
+  --radar-primary: var(--gold);
+  --radar-secondary: var(--maroon);
+  --radar-grid: var(--gray-light);
+}
+
+.dark .radar-chart-container {
+  --radar-grid: var(--dark-border);
+}
+
+/* ============================================================
+   RESPONSIVE UTILITIES
+   ============================================================ */
+
+/* Touch target minimum (44x44px per Apple HIG) */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Safe area padding for iPhone notch */
+.safe-top { padding-top: env(safe-area-inset-top); }
+.safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+
+/* Container (matching index.html pattern) */
+.harmonia-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .harmonia-container { padding: 0 1rem; }
+}
+
+@media (max-width: 480px) {
+  .harmonia-container { padding: 0 0.75rem; }
+}

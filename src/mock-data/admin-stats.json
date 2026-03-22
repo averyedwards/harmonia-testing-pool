@@ -1,0 +1,52 @@
+{
+  "totalUsers": 247,
+  "usersByPhase": {
+    "onboarding": 31,
+    "phase1": 48,
+    "between_1_2": 22,
+    "phase2": 89,
+    "between_2_3": 14,
+    "phase3": 28,
+    "complete": 15
+  },
+  "londonUsers": 112,
+  "globalUsers": 135,
+  "genderRatio": { "male": 119, "female": 128 },
+  "kitsAllocated": 112,
+  "kitsDispatched": 84,
+  "kitsReceived": 61,
+  "resultsUploaded": 42,
+  "waitlistSize": 38,
+  "calibrationCompletionRate": 0.73,
+  "questionnaireCompletionRate": 0.81,
+  "phaseReadiness": {
+    "phase2": {
+      "phase": "phase2",
+      "usersReady": 186,
+      "usersNotReady": 61,
+      "readinessPercent": 75,
+      "blockers": [
+        "23 users have not completed calibration",
+        "38 users have not submitted the personality questionnaire"
+      ],
+      "canTransition": false
+    },
+    "phase3": {
+      "phase": "phase3",
+      "usersReady": 42,
+      "usersNotReady": 70,
+      "readinessPercent": 38,
+      "blockers": [
+        "70 London users do not yet have DNA results uploaded",
+        "28 kits have not been returned"
+      ],
+      "canTransition": false
+    }
+  },
+  "recentActivity": [
+    { "event": "New user registered", "count": 14, "period": "last 7 days" },
+    { "event": "Calibrations completed", "count": 31, "period": "last 7 days" },
+    { "event": "Matches confirmed", "count": 8, "period": "last 7 days" },
+    { "event": "DNA kits received", "count": 5, "period": "last 7 days" }
+  ]
+}

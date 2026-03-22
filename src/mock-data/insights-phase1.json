@@ -1,0 +1,33 @@
+{
+  "userId": "user-001",
+  "generatedAt": "2025-11-28T10:00:00Z",
+  "visualPreferences": {
+    "summary": "You tend to prefer faces that convey warmth and approachability. You consistently rated faces with open expressions and relaxed features higher than those with more neutral or guarded expressions.",
+    "topTraitCorrelations": [
+      { "trait": "open_expression", "correlation": 0.72, "direction": "positive", "description": "You rated people with open, warm expressions higher on average" },
+      { "trait": "strong_jawline", "correlation": -0.31, "direction": "negative", "description": "You rated very sharp, angular features slightly lower" },
+      { "trait": "smile_lines", "correlation": 0.65, "direction": "positive", "description": "You consistently preferred faces with natural smile lines" },
+      { "trait": "dark_hair", "correlation": 0.28, "direction": "positive", "description": "You showed a mild preference for darker hair tones" }
+    ]
+  },
+  "personalityProfile": {
+    "userId": "user-001",
+    "sins": [
+      { "sin": "wrath", "score": -2.1, "confidence": 0.88 },
+      { "sin": "sloth", "score": -1.8, "confidence": 0.82 },
+      { "sin": "pride", "score": 1.4, "confidence": 0.79 },
+      { "sin": "lust", "score": 0.6, "confidence": 0.75 },
+      { "sin": "greed", "score": -3.2, "confidence": 0.91 },
+      { "sin": "gluttony", "score": 0.9, "confidence": 0.70 },
+      { "sin": "envy", "score": -1.5, "confidence": 0.84 }
+    ],
+    "qualityScore": 87,
+    "qualityTier": "high",
+    "createdAt": "2025-11-05T10:00:00Z"
+  },
+  "calibrationStats": {
+    "totalFacesRated": 47,
+    "averageRating": 3.2,
+    "ratingDistribution": { "1": 4, "2": 9, "3": 18, "4": 12, "5": 4 }
+  }
+}

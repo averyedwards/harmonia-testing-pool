@@ -1,0 +1,202 @@
+[
+  {
+    "id": "cand-001",
+    "userId": "user-002",
+    "displayName": "James",
+    "age": 30,
+    "location": "London, UK",
+    "eloRating": 1087,
+    "heartCount": 2,
+    "nComparisons": 8,
+    "matchConfirmed": false,
+    "hlaScore": 82,
+    "hlaDisplayTier": "strong",
+    "perceivedSimilarity": {
+      "rawScore": 0.71,
+      "adjustedScore": 0.67,
+      "tier": "strong_fit",
+      "overlapCount": 5,
+      "headline": "Strong personality match!",
+      "sharedTraits": [
+        { "sin": "wrath", "description": "You both prefer harmony over confrontation", "contribution": 0.22 },
+        { "sin": "greed", "description": "You're both generous with your time and resources", "contribution": 0.18 },
+        { "sin": "envy", "description": "You're both content rather than competitive", "contribution": 0.15 },
+        { "sin": "pride", "description": "You share a grounded, low-ego approach", "contribution": 0.12 }
+      ]
+    }
+  },
+  {
+    "id": "cand-002",
+    "userId": "user-004",
+    "displayName": "Marcus",
+    "age": 29,
+    "location": "London, UK",
+    "eloRating": 1043,
+    "heartCount": 1,
+    "nComparisons": 6,
+    "matchConfirmed": false,
+    "hlaScore": 61,
+    "hlaDisplayTier": "good",
+    "perceivedSimilarity": {
+      "rawScore": 0.48,
+      "adjustedScore": 0.44,
+      "tier": "good_fit",
+      "overlapCount": 4,
+      "headline": "You have a lot in common",
+      "sharedTraits": [
+        { "sin": "sloth", "description": "You're both driven and proactive about your goals", "contribution": 0.19 },
+        { "sin": "wrath", "description": "You both tend to stay calm under pressure", "contribution": 0.16 },
+        { "sin": "pride", "description": "You both value humility in yourselves and others", "contribution": 0.13 }
+      ]
+    }
+  },
+  {
+    "id": "cand-003",
+    "userId": "user-008",
+    "displayName": "Noah",
+    "age": 28,
+    "location": "London, UK",
+    "eloRating": 1124,
+    "heartCount": 3,
+    "nComparisons": 11,
+    "matchConfirmed": true,
+    "hlaScore": 78,
+    "hlaDisplayTier": "strong",
+    "perceivedSimilarity": {
+      "rawScore": 0.83,
+      "adjustedScore": 0.79,
+      "tier": "strong_fit",
+      "overlapCount": 6,
+      "headline": "Strong personality match!",
+      "sharedTraits": [
+        { "sin": "greed", "description": "You're both generous and community-minded", "contribution": 0.24 },
+        { "sin": "wrath", "description": "You both prefer calm, thoughtful responses to conflict", "contribution": 0.20 },
+        { "sin": "envy", "description": "You're both secure and content rather than competitive", "contribution": 0.17 },
+        { "sin": "pride", "description": "You share a deeply humble, others-first mindset", "contribution": 0.14 }
+      ]
+    }
+  },
+  {
+    "id": "cand-004",
+    "userId": "user-010",
+    "displayName": "Eli",
+    "age": 33,
+    "location": "Berlin, Germany",
+    "eloRating": 972,
+    "heartCount": 0,
+    "nComparisons": 4,
+    "matchConfirmed": false,
+    "hlaScore": 38,
+    "hlaDisplayTier": "some",
+    "perceivedSimilarity": {
+      "rawScore": 0.31,
+      "adjustedScore": 0.28,
+      "tier": "moderate_fit",
+      "overlapCount": 2,
+      "headline": "Some shared traits",
+      "sharedTraits": [
+        { "sin": "wrath", "description": "You both tend to avoid unnecessary conflict", "contribution": 0.18 },
+        { "sin": "envy", "description": "You're both fairly content with your own path", "contribution": 0.13 }
+      ]
+    }
+  },
+  {
+    "id": "cand-005",
+    "userId": "user-012",
+    "displayName": "Ryan",
+    "age": 29,
+    "location": "Sydney, Australia",
+    "eloRating": 1008,
+    "heartCount": 1,
+    "nComparisons": 5,
+    "matchConfirmed": false,
+    "hlaScore": 55,
+    "hlaDisplayTier": "good",
+    "perceivedSimilarity": {
+      "rawScore": 0.54,
+      "adjustedScore": 0.50,
+      "tier": "good_fit",
+      "overlapCount": 4,
+      "headline": "You have a lot in common",
+      "sharedTraits": [
+        { "sin": "sloth", "description": "You're both proactive and get things done", "contribution": 0.20 },
+        { "sin": "greed", "description": "You're both generous by nature", "contribution": 0.17 },
+        { "sin": "lust", "description": "You're both spontaneous and up for adventure", "contribution": 0.13 }
+      ]
+    }
+  },
+  {
+    "id": "cand-006",
+    "userId": "user-014",
+    "displayName": "Diego",
+    "age": 32,
+    "location": "Madrid, Spain",
+    "eloRating": 951,
+    "heartCount": 0,
+    "nComparisons": 3,
+    "matchConfirmed": false,
+    "hlaScore": 19,
+    "hlaDisplayTier": "hidden",
+    "perceivedSimilarity": {
+      "rawScore": 0.18,
+      "adjustedScore": 0.16,
+      "tier": "low_fit",
+      "overlapCount": 1,
+      "headline": "Different perspectives, potential spark",
+      "sharedTraits": [
+        { "sin": "wrath", "description": "You both value keeping the peace", "contribution": 0.18 }
+      ]
+    }
+  },
+  {
+    "id": "cand-007",
+    "userId": "user-018",
+    "displayName": "Tom",
+    "age": 34,
+    "location": "London, UK",
+    "eloRating": 1062,
+    "heartCount": 2,
+    "nComparisons": 9,
+    "matchConfirmed": false,
+    "hlaScore": 70,
+    "hlaDisplayTier": "good",
+    "perceivedSimilarity": {
+      "rawScore": 0.62,
+      "adjustedScore": 0.58,
+      "tier": "strong_fit",
+      "overlapCount": 5,
+      "headline": "Strong personality match!",
+      "sharedTraits": [
+        { "sin": "greed", "description": "You're both generous with your time", "contribution": 0.21 },
+        { "sin": "sloth", "description": "You both bring energy and follow-through", "contribution": 0.18 },
+        { "sin": "envy", "description": "You both celebrate others rather than compare", "contribution": 0.14 },
+        { "sin": "wrath", "description": "You both approach conflict with patience", "contribution": 0.11 }
+      ]
+    }
+  },
+  {
+    "id": "cand-008",
+    "userId": "user-006",
+    "displayName": "Luca",
+    "age": 31,
+    "location": "Milan, Italy",
+    "eloRating": 1031,
+    "heartCount": 1,
+    "nComparisons": 6,
+    "matchConfirmed": false,
+    "hlaScore": null,
+    "hlaDisplayTier": null,
+    "perceivedSimilarity": {
+      "rawScore": 0.43,
+      "adjustedScore": 0.40,
+      "tier": "good_fit",
+      "overlapCount": 3,
+      "headline": "You have a lot in common",
+      "sharedTraits": [
+        { "sin": "sloth", "description": "You're both proactive and goal-oriented", "contribution": 0.19 },
+        { "sin": "wrath", "description": "You share a calm, measured approach to disagreements", "contribution": 0.15 },
+        { "sin": "lust", "description": "You both think carefully before acting", "contribution": 0.11 }
+      ]
+    }
+  }
+]

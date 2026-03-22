@@ -1,0 +1,22 @@
+[
+  { "id": "face-001", "imageUrl": "/avatars/female-25.svg", "isRealUser": true, "source": "testing_pool", "gender": "female", "ageRange": "20-25" },
+  { "id": "face-002", "imageUrl": "/avatars/male-28.svg", "isRealUser": true, "source": "testing_pool", "gender": "male", "ageRange": "25-30" },
+  { "id": "face-003", "imageUrl": "/avatars/female-30.svg", "isRealUser": true, "source": "testing_pool", "gender": "female", "ageRange": "28-33" },
+  { "id": "face-004", "imageUrl": "/avatars/male-24.svg", "isRealUser": true, "source": "testing_pool", "gender": "male", "ageRange": "22-27" },
+  { "id": "face-005", "imageUrl": "/avatars/female-27.svg", "isRealUser": true, "source": "testing_pool", "gender": "female", "ageRange": "25-30" },
+  { "id": "face-006", "imageUrl": "/avatars/male-31.svg", "isRealUser": false, "source": "mebeauty", "gender": "male", "ageRange": "28-33" },
+  { "id": "face-007", "imageUrl": "/avatars/female-22.svg", "isRealUser": false, "source": "mebeauty", "gender": "female", "ageRange": "20-25" },
+  { "id": "face-008", "imageUrl": "/avatars/male-26.svg", "isRealUser": false, "source": "us10k", "gender": "male", "ageRange": "24-29" },
+  { "id": "face-009", "imageUrl": "/avatars/female-29.svg", "isRealUser": false, "source": "us10k", "gender": "female", "ageRange": "27-32" },
+  { "id": "face-010", "imageUrl": "/avatars/male-33.svg", "isRealUser": false, "source": "mebeauty", "gender": "male", "ageRange": "30-35" },
+  { "id": "face-011", "imageUrl": "/avatars/female-24.svg", "isRealUser": false, "source": "us10k", "gender": "female", "ageRange": "22-27" },
+  { "id": "face-012", "imageUrl": "/avatars/male-29.svg", "isRealUser": false, "source": "mebeauty", "gender": "male", "ageRange": "27-32" },
+  { "id": "face-013", "imageUrl": "/avatars/female-32.svg", "isRealUser": false, "source": "us10k", "gender": "female", "ageRange": "30-35" },
+  { "id": "face-014", "imageUrl": "/avatars/male-23.svg", "isRealUser": false, "source": "mebeauty", "gender": "male", "ageRange": "21-26" },
+  { "id": "face-015", "imageUrl": "/avatars/female-26.svg", "isRealUser": false, "source": "us10k", "gender": "female", "ageRange": "24-29" },
+  { "id": "face-016", "imageUrl": "/avatars/male-35.svg", "isRealUser": false, "source": "mebeauty", "gender": "male", "ageRange": "32-37" },
+  { "id": "face-017", "imageUrl": "/avatars/female-21.svg", "isRealUser": false, "source": "us10k", "gender": "female", "ageRange": "19-24" },
+  { "id": "face-018", "imageUrl": "/avatars/male-27.svg", "isRealUser": false, "source": "mebeauty", "gender": "male", "ageRange": "25-30" },
+  { "id": "face-019", "imageUrl": "/avatars/female-34.svg", "isRealUser": false, "source": "us10k", "gender": "female", "ageRange": "31-36" },
+  { "id": "face-020", "imageUrl": "/avatars/male-22.svg", "isRealUser": false, "source": "mebeauty", "gender": "male", "ageRange": "20-25" }
+]

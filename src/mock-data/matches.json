@@ -1,0 +1,114 @@
+[
+  {
+    "matchId": "match-001",
+    "userAId": "user-001",
+    "userBId": "user-008",
+    "perceivedSimilarity": {
+      "rawScore": 0.83,
+      "adjustedScore": 0.79,
+      "tier": "strong_fit",
+      "overlapCount": 6,
+      "headline": "Strong personality match!",
+      "sharedTraits": [
+        { "sin": "greed", "description": "You're both generous and community-minded", "contribution": 0.24 },
+        { "sin": "wrath", "description": "You both prefer calm, thoughtful responses to conflict", "contribution": 0.20 },
+        { "sin": "envy", "description": "You're both secure and content rather than competitive", "contribution": 0.17 },
+        { "sin": "pride", "description": "You share a deeply humble, others-first mindset", "contribution": 0.14 }
+      ]
+    },
+    "hlaScore": 78,
+    "confirmedAt": "2025-12-01T14:22:00Z",
+    "contactExchanged": true,
+    "contactTypeA": "instagram",
+    "contactTypeB": "phone"
+  },
+  {
+    "matchId": "match-002",
+    "userAId": "user-001",
+    "userBId": "user-002",
+    "perceivedSimilarity": {
+      "rawScore": 0.71,
+      "adjustedScore": 0.67,
+      "tier": "strong_fit",
+      "overlapCount": 5,
+      "headline": "Strong personality match!",
+      "sharedTraits": [
+        { "sin": "wrath", "description": "You both prefer harmony over confrontation", "contribution": 0.22 },
+        { "sin": "greed", "description": "You're both generous with your time and resources", "contribution": 0.18 },
+        { "sin": "envy", "description": "You're both content rather than competitive", "contribution": 0.15 },
+        { "sin": "pride", "description": "You share a grounded, low-ego approach", "contribution": 0.12 }
+      ]
+    },
+    "hlaScore": null,
+    "confirmedAt": "2025-12-03T11:08:00Z",
+    "contactExchanged": false,
+    "contactTypeA": null,
+    "contactTypeB": null
+  },
+  {
+    "matchId": "match-003",
+    "userAId": "user-003",
+    "userBId": "user-008",
+    "perceivedSimilarity": {
+      "rawScore": 0.52,
+      "adjustedScore": 0.48,
+      "tier": "good_fit",
+      "overlapCount": 4,
+      "headline": "You have a lot in common",
+      "sharedTraits": [
+        { "sin": "lust", "description": "You're both spontaneous and up for adventure", "contribution": 0.20 },
+        { "sin": "envy", "description": "You're both secure in yourselves", "contribution": 0.16 },
+        { "sin": "wrath", "description": "You both keep calm under pressure", "contribution": 0.12 }
+      ]
+    },
+    "hlaScore": 65,
+    "confirmedAt": "2025-12-05T09:45:00Z",
+    "contactExchanged": true,
+    "contactTypeA": "email",
+    "contactTypeB": "instagram"
+  },
+  {
+    "matchId": "match-004",
+    "userAId": "user-004",
+    "userBId": "user-013",
+    "perceivedSimilarity": {
+      "rawScore": 0.39,
+      "adjustedScore": 0.35,
+      "tier": "moderate_fit",
+      "overlapCount": 3,
+      "headline": "Some shared traits",
+      "sharedTraits": [
+        { "sin": "sloth", "description": "You're both driven and goal-oriented", "contribution": 0.19 },
+        { "sin": "wrath", "description": "You both prefer thoughtful responses over reactions", "contribution": 0.14 }
+      ]
+    },
+    "hlaScore": null,
+    "confirmedAt": "2025-12-06T16:30:00Z",
+    "contactExchanged": true,
+    "contactTypeA": "phone",
+    "contactTypeB": "prefer_not_to_share"
+  },
+  {
+    "matchId": "match-005",
+    "userAId": "user-005",
+    "userBId": "user-019",
+    "perceivedSimilarity": {
+      "rawScore": 0.61,
+      "adjustedScore": 0.57,
+      "tier": "strong_fit",
+      "overlapCount": 5,
+      "headline": "Strong personality match!",
+      "sharedTraits": [
+        { "sin": "pride", "description": "You both have a confident but grounded self-image", "contribution": 0.21 },
+        { "sin": "gluttony", "description": "You both enjoy life's pleasures with intention", "contribution": 0.18 },
+        { "sin": "lust", "description": "You're both open to new experiences", "contribution": 0.14 },
+        { "sin": "envy", "description": "You both cheer others on rather than compare", "contribution": 0.10 }
+      ]
+    },
+    "hlaScore": null,
+    "confirmedAt": "2025-12-08T10:15:00Z",
+    "contactExchanged": false,
+    "contactTypeA": null,
+    "contactTypeB": null
+  }
+]

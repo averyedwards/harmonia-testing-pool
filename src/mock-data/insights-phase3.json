@@ -1,0 +1,56 @@
+{
+  "userId": "user-001",
+  "generatedAt": "2026-01-15T12:00:00Z",
+  "tournamentStats": {
+    "totalComparisons": 22,
+    "averageDecisionTimeMs": 5340,
+    "personalityClickRate": 0.64,
+    "passBothCount": 2
+  },
+  "personalityInfluence": {
+    "choicesWithPersonalityViewed": 14,
+    "choicesWithoutPersonalityViewed": 8,
+    "selectionShiftPercent": 0.36,
+    "summary": "Personality data influenced 36% of your Phase 3 choices, up from 31% in Phase 2. Your attention to shared traits grew alongside genetics information."
+  },
+  "crossPhaseComparison": {
+    "phase1TopTraits": ["open_expression", "smile_lines"],
+    "phase2TopTraits": ["greed_alignment", "wrath_alignment"],
+    "shiftDescription": "Your selections moved toward candidates with strong HLA compatibility and high personality alignment, suggesting all three signals reinforced each other."
+  },
+  "geneticsInfluence": {
+    "matchesWithHighHLA": 2,
+    "matchesWithLowHLA": 0,
+    "hlaInfluenceDescription": "Both your confirmed matches had HLA scores above 75. In comparisons where one candidate had a strong chemistry signal and one did not, you chose the higher HLA candidate 78% of the time."
+  },
+  "postMeetupFeedback": [
+    {
+      "matchId": "match-001",
+      "userId": "user-001",
+      "didMeet": true,
+      "interestScore": 6,
+      "orientation": "long_term",
+      "submittedAt": "2025-12-05T14:00:00Z"
+    }
+  ],
+  "fullCrossPhaseComparison": {
+    "phase1": ["open_expression", "smile_lines", "dark_hair"],
+    "phase2": ["greed_alignment", "wrath_alignment", "envy_alignment"],
+    "phase3": ["hla_strong", "greed_alignment", "wrath_alignment"],
+    "overallShiftDescription": "Across all three phases, your preferences evolved from purely visual cues to a blend of visual, personality, and genetic compatibility signals. By Phase 3, all three signals were working together."
+  },
+  "matchOutcomes": [
+    { "matchId": "match-001", "candidateDisplayName": "Noah", "confirmedAt": "2025-12-01T14:22:00Z", "contactExchanged": true },
+    { "matchId": "match-002", "candidateDisplayName": "James", "confirmedAt": "2025-12-03T11:08:00Z", "contactExchanged": false }
+  ],
+  "eloRankings": [
+    { "candidateId": "cand-003", "displayName": "Noah", "eloRating": 1148, "heartCount": 3 },
+    { "candidateId": "cand-001", "displayName": "James", "eloRating": 1102, "heartCount": 3 },
+    { "candidateId": "cand-007", "displayName": "Tom", "eloRating": 1071, "heartCount": 2 },
+    { "candidateId": "cand-002", "displayName": "Marcus", "eloRating": 1044, "heartCount": 1 },
+    { "candidateId": "cand-005", "displayName": "Ryan", "eloRating": 1018, "heartCount": 1 },
+    { "candidateId": "cand-008", "displayName": "Luca", "eloRating": 1009, "heartCount": 1 },
+    { "candidateId": "cand-004", "displayName": "Eli", "eloRating": 968, "heartCount": 0 },
+    { "candidateId": "cand-006", "displayName": "Diego", "eloRating": 940, "heartCount": 0 }
+  ]
+}

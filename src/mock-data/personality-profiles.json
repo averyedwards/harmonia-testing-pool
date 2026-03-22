@@ -1,0 +1,182 @@
+[
+  {
+    "userId": "user-001",
+    "sins": [
+      { "sin": "wrath", "score": -2.1, "confidence": 0.88 },
+      { "sin": "sloth", "score": -1.8, "confidence": 0.82 },
+      { "sin": "pride", "score": 1.4, "confidence": 0.79 },
+      { "sin": "lust", "score": 0.6, "confidence": 0.75 },
+      { "sin": "greed", "score": -3.2, "confidence": 0.91 },
+      { "sin": "gluttony", "score": 0.9, "confidence": 0.70 },
+      { "sin": "envy", "score": -1.5, "confidence": 0.84 }
+    ],
+    "qualityScore": 87,
+    "qualityTier": "high",
+    "createdAt": "2025-11-05T10:00:00Z"
+  },
+  {
+    "userId": "user-002",
+    "sins": [
+      { "sin": "wrath", "score": 2.8, "confidence": 0.85 },
+      { "sin": "sloth", "score": -3.4, "confidence": 0.90 },
+      { "sin": "pride", "score": 2.1, "confidence": 0.83 },
+      { "sin": "lust", "score": 1.7, "confidence": 0.78 },
+      { "sin": "greed", "score": 0.4, "confidence": 0.72 },
+      { "sin": "gluttony", "score": -1.2, "confidence": 0.80 },
+      { "sin": "envy", "score": 0.8, "confidence": 0.76 }
+    ],
+    "qualityScore": 82,
+    "qualityTier": "high",
+    "createdAt": "2025-11-06T09:00:00Z"
+  },
+  {
+    "userId": "user-003",
+    "sins": [
+      { "sin": "wrath", "score": -3.8, "confidence": 0.92 },
+      { "sin": "sloth", "score": 1.2, "confidence": 0.74 },
+      { "sin": "pride", "score": -0.5, "confidence": 0.68 },
+      { "sin": "lust", "score": 3.1, "confidence": 0.87 },
+      { "sin": "greed", "score": -1.8, "confidence": 0.80 },
+      { "sin": "gluttony", "score": 2.4, "confidence": 0.82 },
+      { "sin": "envy", "score": -2.6, "confidence": 0.88 }
+    ],
+    "qualityScore": 79,
+    "qualityTier": "high",
+    "createdAt": "2025-11-06T11:00:00Z"
+  },
+  {
+    "userId": "user-004",
+    "sins": [
+      { "sin": "wrath", "score": 1.1, "confidence": 0.71 },
+      { "sin": "sloth", "score": -2.9, "confidence": 0.88 },
+      { "sin": "pride", "score": -1.6, "confidence": 0.77 },
+      { "sin": "lust", "score": -0.8, "confidence": 0.72 },
+      { "sin": "greed", "score": 2.7, "confidence": 0.85 },
+      { "sin": "gluttony", "score": -0.4, "confidence": 0.69 },
+      { "sin": "envy", "score": 1.9, "confidence": 0.81 }
+    ],
+    "qualityScore": 73,
+    "qualityTier": "moderate",
+    "createdAt": "2025-11-07T08:00:00Z"
+  },
+  {
+    "userId": "user-005",
+    "sins": [
+      { "sin": "wrath", "score": 0.3, "confidence": 0.65 },
+      { "sin": "sloth", "score": 2.5, "confidence": 0.84 },
+      { "sin": "pride", "score": 3.4, "confidence": 0.89 },
+      { "sin": "lust", "score": 2.0, "confidence": 0.81 },
+      { "sin": "greed", "score": 1.3, "confidence": 0.76 },
+      { "sin": "gluttony", "score": 3.8, "confidence": 0.91 },
+      { "sin": "envy", "score": 2.2, "confidence": 0.83 }
+    ],
+    "qualityScore": 61,
+    "qualityTier": "moderate",
+    "createdAt": "2025-11-07T14:00:00Z"
+  },
+  {
+    "userId": "user-006",
+    "sins": [
+      { "sin": "wrath", "score": -1.4, "confidence": 0.79 },
+      { "sin": "sloth", "score": -4.2, "confidence": 0.93 },
+      { "sin": "pride", "score": 0.7, "confidence": 0.70 },
+      { "sin": "lust", "score": -2.3, "confidence": 0.86 },
+      { "sin": "greed", "score": -0.9, "confidence": 0.73 },
+      { "sin": "gluttony", "score": 1.6, "confidence": 0.78 },
+      { "sin": "envy", "score": -0.3, "confidence": 0.67 }
+    ],
+    "qualityScore": 84,
+    "qualityTier": "high",
+    "createdAt": "2025-11-08T09:00:00Z"
+  },
+  {
+    "userId": "user-007",
+    "sins": [
+      { "sin": "wrath", "score": 4.1, "confidence": 0.90 },
+      { "sin": "sloth", "score": 1.8, "confidence": 0.77 },
+      { "sin": "pride", "score": 4.4, "confidence": 0.92 },
+      { "sin": "lust", "score": 1.2, "confidence": 0.74 },
+      { "sin": "greed", "score": 3.5, "confidence": 0.88 },
+      { "sin": "gluttony", "score": 0.6, "confidence": 0.69 },
+      { "sin": "envy", "score": 3.8, "confidence": 0.89 }
+    ],
+    "qualityScore": 52,
+    "qualityTier": "moderate",
+    "createdAt": "2025-11-08T12:00:00Z"
+  },
+  {
+    "userId": "user-008",
+    "sins": [
+      { "sin": "wrath", "score": -0.6, "confidence": 0.72 },
+      { "sin": "sloth", "score": -1.1, "confidence": 0.75 },
+      { "sin": "pride", "score": -3.7, "confidence": 0.91 },
+      { "sin": "lust", "score": -1.9, "confidence": 0.83 },
+      { "sin": "greed", "score": -4.1, "confidence": 0.93 },
+      { "sin": "gluttony", "score": -2.8, "confidence": 0.87 },
+      { "sin": "envy", "score": -3.3, "confidence": 0.90 }
+    ],
+    "qualityScore": 91,
+    "qualityTier": "high",
+    "createdAt": "2025-11-09T09:00:00Z"
+  },
+  {
+    "userId": "user-009",
+    "sins": [
+      { "sin": "wrath", "score": -2.9, "confidence": 0.87 },
+      { "sin": "sloth", "score": 0.4, "confidence": 0.68 },
+      { "sin": "pride", "score": 1.8, "confidence": 0.80 },
+      { "sin": "lust", "score": 0.2, "confidence": 0.65 },
+      { "sin": "greed", "score": 2.1, "confidence": 0.82 },
+      { "sin": "gluttony", "score": -1.5, "confidence": 0.77 },
+      { "sin": "envy", "score": 1.0, "confidence": 0.73 }
+    ],
+    "qualityScore": 68,
+    "qualityTier": "moderate",
+    "createdAt": "2025-11-09T11:00:00Z"
+  },
+  {
+    "userId": "user-010",
+    "sins": [
+      { "sin": "wrath", "score": 0.9, "confidence": 0.73 },
+      { "sin": "sloth", "score": -3.6, "confidence": 0.91 },
+      { "sin": "pride", "score": -2.4, "confidence": 0.85 },
+      { "sin": "lust", "score": 3.8, "confidence": 0.90 },
+      { "sin": "greed", "score": 0.7, "confidence": 0.70 },
+      { "sin": "gluttony", "score": 2.9, "confidence": 0.86 },
+      { "sin": "envy", "score": -1.1, "confidence": 0.76 }
+    ],
+    "qualityScore": 76,
+    "qualityTier": "high",
+    "createdAt": "2025-11-10T08:00:00Z"
+  },
+  {
+    "userId": "user-011",
+    "sins": [
+      { "sin": "wrath", "score": 1.5, "confidence": 0.76 },
+      { "sin": "sloth", "score": 3.2, "confidence": 0.88 },
+      { "sin": "pride", "score": 2.6, "confidence": 0.84 },
+      { "sin": "lust", "score": -0.4, "confidence": 0.67 },
+      { "sin": "greed", "score": 1.0, "confidence": 0.72 },
+      { "sin": "gluttony", "score": 1.8, "confidence": 0.79 },
+      { "sin": "envy", "score": 0.6, "confidence": 0.70 }
+    ],
+    "qualityScore": 58,
+    "qualityTier": "moderate",
+    "createdAt": "2025-11-10T12:00:00Z"
+  },
+  {
+    "userId": "user-012",
+    "sins": [
+      { "sin": "wrath", "score": -0.2, "confidence": 0.66 },
+      { "sin": "sloth", "score": -2.1, "confidence": 0.83 },
+      { "sin": "pride", "score": -0.9, "confidence": 0.73 },
+      { "sin": "lust", "score": 2.4, "confidence": 0.85 },
+      { "sin": "greed", "score": -2.6, "confidence": 0.87 },
+      { "sin": "gluttony", "score": 0.3, "confidence": 0.67 },
+      { "sin": "envy", "score": -0.7, "confidence": 0.71 }
+    ],
+    "qualityScore": 72,
+    "qualityTier": "moderate",
+    "createdAt": "2025-11-11T09:00:00Z"
+  }
+]
