@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
+import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { useAuth } from '@/hooks/useAuth'
 
@@ -74,13 +75,13 @@ export function MobileMenu({ open, onClose, links }: MobileMenuProps) {
                 animationFillMode: 'forwards',
               }}
             >
-              <a
+              <Link
                 href={link.href}
                 onClick={onClose}
                 className="block py-3 px-3 text-body font-medium text-navy dark:text-cream hover:text-gold dark:hover:text-gold-dark hover:bg-blush dark:hover:bg-dark-surface rounded-button transition-colors"
               >
                 {link.label}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>

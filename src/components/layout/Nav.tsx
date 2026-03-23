@@ -7,6 +7,7 @@ import { usePhase } from '@/hooks/usePhase'
 import { useNotifications } from '@/hooks/useNotifications'
 import { cn } from '@/lib/utils'
 import { PHASE_LABELS } from '@/lib/constants'
+import Link from 'next/link'
 import { MobileMenu } from './MobileMenu'
 import { Sun, Moon, Bell, Menu, X, ChevronDown } from 'lucide-react'
 
@@ -43,13 +44,13 @@ export function Nav() {
         {/* Desktop nav links */}
         <div className="hidden md:flex items-center gap-6">
           {navLinks.map(link => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               className="text-body-sm font-medium text-slate hover:text-gold dark:hover:text-gold-dark transition-colors"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </div>
 
@@ -70,7 +71,7 @@ export function Nav() {
           </button>
 
           {/* Notification bell */}
-          <a
+          <Link
             href="/notifications"
             className="touch-target flex items-center justify-center text-slate hover:text-gold transition-colors relative"
             aria-label="Notifications"
@@ -80,7 +81,7 @@ export function Nav() {
             {unreadCount > 0 && (
               <span className="absolute top-1 right-1 w-2 h-2 bg-gold rounded-full" />
             )}
-          </a>
+          </Link>
 
           {/* User avatar — desktop */}
           {user && (
