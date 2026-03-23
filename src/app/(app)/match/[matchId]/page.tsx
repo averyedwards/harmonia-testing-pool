@@ -1,6 +1,5 @@
 'use client'
 
-import { use } from 'react'
 import { useState } from 'react'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -30,8 +29,8 @@ const tierBadgeVariant: Record<string, 'success' | 'phase' | 'warning' | 'error'
   low_fit: 'error',
 }
 
-export default function MatchPage({ params }: { params: Promise<{ matchId: string }> }) {
-  const { matchId } = use(params)
+export default function MatchPage({ params }: { params: { matchId: string } }) {
+  const { matchId } = params
   const router = useRouter()
   const [contactExchanged, setContactExchanged] = useState(false)
 

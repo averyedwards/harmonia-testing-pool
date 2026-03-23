@@ -1,6 +1,6 @@
 'use client'
 
-import { use, useState } from 'react'
+import { useState } from 'react'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
@@ -17,8 +17,8 @@ const INTEREST_LABELS: Record<number, string> = {
   7: 'Definitely',
 }
 
-export default function SurveyPage({ params }: { params: Promise<{ matchId: string }> }) {
-  const { matchId } = use(params)
+export default function SurveyPage({ params }: { params: { matchId: string } }) {
+  const { matchId } = params
   const router = useRouter()
 
   const [didMeet, setDidMeet] = useState<boolean | null>(null)
