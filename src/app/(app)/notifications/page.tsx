@@ -1,11 +1,10 @@
 'use client'
 
-import { useState } from 'react'
 import { Card } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
-import notificationsData from '@/mock-data/notifications.json'
+import { useNotifications } from '@/hooks/useNotifications'
+import type { AppNotification } from '@/providers/NotificationsProvider'
 
 type NotificationType =
   | 'phase_transition'
@@ -15,16 +14,6 @@ type NotificationType =
   | 'we_met_survey'
   | 'community_update'
   | 'kit_status_update'
-
-interface Notification {
-  id: string
-  type: NotificationType
-  title: string
-  body: string
-  read: boolean
-  createdAt: string
-  actionUrl: string
-}
 
 const NOTIFICATION_ICONS: Record<NotificationType, string> = {
   phase_transition: '🚀',
@@ -46,11 +35,11 @@ function timeAgo(dateStr: string): string {
   return 'Just now'
 }
 
-function groupByTime(notifications: Notification[]): { label: string; items: Notification[] }[] {
+function groupByTime(notifications: AppNotification[]): { label: string; items: AppNotification[] }[] {
   const now = Date.now()
-  const today: Notification[] = []
-  const thisWeek: Notification[] = []
-  const earlier: Notification[] = []
+  const today: AppNotification[] = []
+  const thisWeek: AppNotification[] = []
+  const earlier: AppNotification[] = []
 
   for (const n of notifications) {
     const diff = now - new Date(n.createdAt).getTime()
@@ -69,24 +58,10 @@ function groupByTime(notifications: Notification[]): { label: string; items: Not
 
 export default function NotificationsPage() {
   const router = useRouter()
-  const [notifications, setNotifications] = useState<Notification[]>(
-    [...notificationsData as Notification[]].sort(
-      (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-    )
-  )
-
-  const unreadCount = notifications.filter(n => !n.read).length
+  const { notifications, unreadCount, markRead, markAllRead } = useNotifications()
   const groups = groupByTime(notifications)
 
-  function markRead(id: string) {
-    setNotifications(prev => prev.map(n => n.id === id ? { ...n, read: true } : n))
-  }
-
-  function markAllRead() {
-    setNotifications(prev => prev.map(n => ({ ...n, read: true })))
-  }
-
-  function handleNotificationClick(notification: Notification) {
+  function handleNotificationClick(notification: AppNotification) {
     markRead(notification.id)
     router.push(notification.actionUrl)
   }
@@ -137,7 +112,7 @@ export default function NotificationsPage() {
                     <div className="flex items-start gap-3">
                       {/* Icon */}
                       <div className="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
-                        {NOTIFICATION_ICONS[notification.type]}
+                        {NOTIFICATION_ICONS[notification.type as NotificationType] ?? '•'}
                       </div>
 
                       {/* Content */}

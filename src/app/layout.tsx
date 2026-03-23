@@ -4,6 +4,7 @@ import './globals.css'
 import { ThemeProvider } from '@/providers/ThemeProvider'
 import { AuthProvider } from '@/providers/AuthProvider'
 import { PhaseProvider } from '@/providers/PhaseProvider'
+import { NotificationsProvider } from '@/providers/NotificationsProvider'
 import { ToastProvider } from '@/components/ui/toast'
 import { AppShell } from '@/components/layout/AppShell'
 
@@ -59,9 +60,11 @@ export default function RootLayout({
         <ThemeProvider>
           <AuthProvider>
             <PhaseProvider>
-              <ToastProvider>
-                <AppShell>{children}</AppShell>
-              </ToastProvider>
+              <NotificationsProvider>
+                <ToastProvider>
+                  <AppShell>{children}</AppShell>
+                </ToastProvider>
+              </NotificationsProvider>
             </PhaseProvider>
           </AuthProvider>
         </ThemeProvider>

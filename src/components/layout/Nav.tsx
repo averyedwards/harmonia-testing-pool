@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useTheme } from '@/hooks/useTheme'
 import { useAuth } from '@/hooks/useAuth'
 import { usePhase } from '@/hooks/usePhase'
+import { useNotifications } from '@/hooks/useNotifications'
 import { cn } from '@/lib/utils'
 import { PHASE_LABELS } from '@/lib/constants'
 import { MobileMenu } from './MobileMenu'
@@ -13,6 +14,7 @@ export function Nav() {
   const { theme, toggleTheme } = useTheme()
   const { user, isAdmin } = useAuth()
   const { phase } = usePhase()
+  const { unreadCount } = useNotifications()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const navLinks = [
@@ -74,8 +76,10 @@ export function Nav() {
             aria-label="Notifications"
           >
             <Bell size={18} />
-            {/* Unread indicator dot */}
-            <span className="absolute top-1 right-1 w-2 h-2 bg-gold rounded-full" />
+            {/* Unread indicator dot — only shown when there are unread notifications */}
+            {unreadCount > 0 && (
+              <span className="absolute top-1 right-1 w-2 h-2 bg-gold rounded-full" />
+            )}
           </a>
 
           {/* User avatar — desktop */}
