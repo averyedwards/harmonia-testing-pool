@@ -1,30 +1,27 @@
 import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 
-/** Merge Tailwind classes safely */
+/** Merge Tailwind classes with conflict resolution */
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-/** Format a number as a percentage string */
-export function formatPercent(value: number, decimals = 0): string {
-  return `${(value * 100).toFixed(decimals)}%`
+/** Format a timestamp to relative time ("2 hours ago", "3 days ago") */
+export function timeAgo(dateString: string): string {
+  const now = new Date()
+  const date = new Date(dateString)
+  const seconds = Math.floor((now.getTime() - date.getTime()) / 1000)
+
+  if (seconds < 60) return 'just now'
+  if (seconds < 3600) return `${Math.floor(seconds / 60)}m ago`
+  if (seconds < 86400) return `${Math.floor(seconds / 3600)}h ago`
+  if (seconds < 604800) return `${Math.floor(seconds / 86400)}d ago`
+  return date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })
 }
 
-/** Format a date string to a human-readable form */
-export function formatDate(iso: string): string {
-  return new Date(iso).toLocaleDateString('en-GB', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  })
-}
-
-/** Format milliseconds to a readable duration */
-export function formatDuration(ms: number): string {
-  if (ms < 1000) return `${ms}ms`
-  if (ms < 60000) return `${(ms / 1000).toFixed(1)}s`
-  return `${Math.floor(ms / 60000)}m ${Math.floor((ms % 60000) / 1000)}s`
+/** Format a percentage for display (no decimals) */
+export function formatPercent(value: number): string {
+  return `${Math.round(value * 100)}%`
 }
 
 /** Clamp a number between min and max */
@@ -32,38 +29,38 @@ export function clamp(value: number, min: number, max: number): number {
   return Math.min(Math.max(value, min), max)
 }
 
-/** Calculate Elo change after a match (k=20, RD=400) */
-export function calculateEloChange(
-  winnerElo: number,
-  loserElo: number,
+/** Calculate Elo expected score (from CurmElo: k=20, R_D=400) */
+export function eloExpectedScore(ratingA: number, ratingB: number, scale = 400): number {
+  return 1.0 / (1.0 + Math.exp((ratingB - ratingA) / scale))
+}
+
+/** Update Elo ratings after a comparison */
+export function updateElo(
+  winnerRating: number,
+  loserRating: number,
   k = 20,
-  rd = 400
-): { winnerNew: number; loserNew: number } {
-  const expected = 1 / (1 + Math.pow(10, (loserElo - winnerElo) / rd))
-  const change = Math.round(k * (1 - expected))
+  scale = 400
+): { newWinner: number; newLoser: number } {
+  const expected = eloExpectedScore(winnerRating, loserRating, scale)
+  const delta = k * (1.0 - expected)
   return {
-    winnerNew: winnerElo + change,
-    loserNew: loserElo - change,
+    newWinner: winnerRating + delta,
+    newLoser: loserRating - delta,
   }
 }
 
-/** Get initials from a display name */
-export function getInitials(name: string): string {
-  return name
-    .split(' ')
-    .map((n) => n[0])
-    .slice(0, 2)
-    .join('')
-    .toUpperCase()
-}
-
-/** Truncate text to a maximum length */
-export function truncate(text: string, maxLength: number): string {
-  if (text.length <= maxLength) return text
-  return text.slice(0, maxLength - 3) + '...'
-}
-
-/** Count words in a string */
+/** Get word count from a string */
 export function wordCount(text: string): number {
   return text.trim().split(/\s+/).filter(Boolean).length
+}
+
+/** Check if word count is within questionnaire bounds (25-150) */
+export function isValidWordCount(text: string): { valid: boolean; count: number; tooShort: boolean; tooLong: boolean } {
+  const count = wordCount(text)
+  return {
+    valid: count >= 25 && count <= 150,
+    count,
+    tooShort: count < 25,
+    tooLong: count > 150,
+  }
 }

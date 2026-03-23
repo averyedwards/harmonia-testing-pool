@@ -1,70 +1,85 @@
 'use client'
 
-import React, { createContext, useContext, useState } from 'react'
-import type { User, Phase } from '@/types'
+import { createContext, useState, useCallback, type ReactNode } from 'react'
+import type { User, UserRole } from '@/types'
 
-// Mock current user for prototype
+interface AuthContextValue {
+  user: User | null
+  isLoggedIn: boolean
+  isAdmin: boolean
+  login: (role?: UserRole) => void
+  logout: () => void
+  updateUser: (updates: Partial<User>) => void
+}
+
+// Mock user matching our mock-data/users.json first entry
 const MOCK_USER: User = {
   id: 'user-001',
-  email: 'alex.morgan@example.com',
+  email: 'alex.morgan@gmail.com',
   displayName: 'Alex Morgan',
   firstName: 'Alex',
   lastName: 'Morgan',
-  age: 27,
+  age: 26,
   gender: 'female',
   orientation: 'straight',
   location: 'London, UK',
   isLondon: true,
   phoneNumber: '+44 7700 900123',
   photoUrl: null,
-  onboardingStep: 7,
+  onboardingStep: 7, // fully onboarded for dev
   calibrationComplete: true,
   questionnaireComplete: true,
   currentPhase: 'phase2',
   role: 'user',
-  createdAt: '2025-11-01T09:00:00Z',
+  createdAt: '2026-03-01T10:00:00Z',
 }
 
-interface AuthContextValue {
-  user: User | null
-  isAuthenticated: boolean
-  isAdmin: boolean
-  login: (email: string) => void
-  logout: () => void
-  updateUser: (updates: Partial<User>) => void
+const MOCK_ADMIN: User = {
+  ...MOCK_USER,
+  id: 'admin-001',
+  email: 'avery@harmoniaengine.com',
+  displayName: 'Avery Edwards',
+  firstName: 'Avery',
+  lastName: 'Edwards',
+  role: 'admin',
 }
 
-const AuthContext = createContext<AuthContextValue | undefined>(undefined)
+export const AuthContext = createContext<AuthContextValue>({
+  user: null,
+  isLoggedIn: false,
+  isAdmin: false,
+  login: () => {},
+  logout: () => {},
+  updateUser: () => {},
+})
 
-export function AuthProvider({ children }: { children: React.ReactNode }) {
-  // Start logged out so the landing page is visible; swap to MOCK_USER to test authenticated views
-  const [user, setUser] = useState<User | null>(null)
+export function AuthProvider({ children }: { children: ReactNode }) {
+  const [user, setUser] = useState<User | null>(MOCK_USER) // logged in by default for dev
 
-  const isAuthenticated = user !== null
-  const isAdmin = user?.role === 'admin'
+  const login = useCallback((role: UserRole = 'user') => {
+    setUser(role === 'admin' ? MOCK_ADMIN : MOCK_USER)
+  }, [])
 
-  function login(email: string) {
-    // Mock login: just restore the mock user
-    setUser({ ...MOCK_USER, email })
-  }
-
-  function logout() {
+  const logout = useCallback(() => {
     setUser(null)
-  }
+  }, [])
 
-  function updateUser(updates: Partial<User>) {
-    setUser((prev) => (prev ? { ...prev, ...updates } : null))
-  }
+  const updateUser = useCallback((updates: Partial<User>) => {
+    setUser(prev => prev ? { ...prev, ...updates } : null)
+  }, [])
 
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, isAdmin, login, logout, updateUser }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        isLoggedIn: user !== null,
+        isAdmin: user?.role === 'admin',
+        login,
+        logout,
+        updateUser,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   )
-}
-
-export function useAuthContext(): AuthContextValue {
-  const ctx = useContext(AuthContext)
-  if (!ctx) throw new Error('useAuthContext must be used inside AuthProvider')
-  return ctx
 }

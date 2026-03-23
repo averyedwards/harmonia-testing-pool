@@ -1,25 +1,25 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export function useMediaQuery(query: string): boolean {
   const [matches, setMatches] = useState(false)
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia(query)
-    setMatches(mediaQuery.matches)
+    const media = window.matchMedia(query)
+    setMatches(media.matches)
 
-    const handler = (e: MediaQueryListEvent) => setMatches(e.matches)
-    mediaQuery.addEventListener('change', handler)
-    return () => mediaQuery.removeEventListener('change', handler)
+    const listener = (e: MediaQueryListEvent) => setMatches(e.matches)
+    media.addEventListener('change', listener)
+    return () => media.removeEventListener('change', listener)
   }, [query])
 
   return matches
 }
 
-/** Convenience hooks for common breakpoints */
+/** Convenience hooks matching Tailwind breakpoints */
 export function useIsMobile() {
-  return useMediaQuery('(max-width: 767px)')
+  return !useMediaQuery('(min-width: 768px)')
 }
 
 export function useIsTablet() {

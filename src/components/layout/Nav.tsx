@@ -1,141 +1,111 @@
 'use client'
 
-import React, { useState } from 'react'
-import Link from 'next/link'
+import { useState } from 'react'
 import { useTheme } from '@/hooks/useTheme'
 import { useAuth } from '@/hooks/useAuth'
+import { usePhase } from '@/hooks/usePhase'
 import { cn } from '@/lib/utils'
+import { PHASE_LABELS } from '@/lib/constants'
 import { MobileMenu } from './MobileMenu'
-
-function ThemeToggle() {
-  const { theme, toggleTheme } = useTheme()
-  const isDark = theme === 'dark'
-
-  return (
-    <button
-      onClick={toggleTheme}
-      aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-      className={cn(
-        'relative w-[52px] h-7 rounded-full border-none cursor-pointer transition-colors duration-300 outline-none flex-shrink-0',
-        isDark ? 'bg-[var(--gold)]' : 'bg-[#e8e0d5]'
-      )}
-    >
-      {/* Sliding pill */}
-      <span
-        className={cn(
-          'absolute top-0.5 left-0.5 w-6 h-6 bg-white rounded-full shadow transition-transform duration-300',
-          isDark && 'translate-x-6'
-        )}
-      />
-      {/* Icons */}
-      <span className="absolute inset-0 flex items-center justify-between px-1.5 pointer-events-none">
-        {/* Sun */}
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
-          className={isDark ? 'text-white' : 'text-[var(--gold)]'}>
-          <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/>
-          <line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/>
-          <line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-        </svg>
-        {/* Moon */}
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
-          className={isDark ? 'text-[var(--maroon)]' : 'text-white'}>
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-        </svg>
-      </span>
-    </button>
-  )
-}
+import { Sun, Moon, Bell, Menu, X, ChevronDown } from 'lucide-react'
 
 export function Nav() {
-  const { user, isAuthenticated } = useAuth()
-  const [mobileOpen, setMobileOpen] = useState(false)
+  const { theme, toggleTheme } = useTheme()
+  const { user, isAdmin } = useAuth()
+  const { phase } = usePhase()
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
-  const authedLinks = [
-    { href: '/dashboard', label: 'Dashboard' },
-    { href: '/calibration', label: 'Phase 1' },
-    { href: '/tournament', label: 'Phase 2' },
-    { href: '/insights', label: 'Insights' },
+  const navLinks = [
+    { label: 'Dashboard', href: '/dashboard' },
+    { label: 'Tournament', href: '/tournament' },
+    { label: 'Insights', href: '/insights' },
+    { label: 'Settings', href: '/settings' },
+    ...(isAdmin ? [{ label: 'Admin', href: '/admin' }] : []),
   ]
-
-  const publicLinks = [
-    { href: '#how-it-works', label: 'How it works' },
-    { href: '#signals', label: 'The signals' },
-    { href: '#insights', label: 'Insights' },
-    { href: '/login', label: 'Sign in' },
-  ]
-
-  const links = isAuthenticated ? authedLinks : publicLinks
 
   return (
     <>
-      <nav className="glass-nav fixed top-0 left-0 right-0 z-40 safe-top">
-        <div className="harmonia-container">
-          <div className="flex items-center justify-between h-16">
+      <nav className="glass-nav fixed top-0 left-0 right-0 z-40 px-4 md:px-6 py-3 flex items-center justify-between safe-top">
+        {/* Logo */}
+        <div className="flex items-center gap-2 cursor-pointer">
+          <img
+            src="/icons/harmonia-logo.svg"
+            alt="Harmonia"
+            className="h-8 w-auto dark:invert dark:hue-rotate-180 dark:brightness-110"
+          />
+          <span className="font-heading text-h4 text-navy dark:text-cream hidden sm:block">
+            Harmonia
+          </span>
+        </div>
 
-            {/* Logo */}
-            <Link href="/" className="flex items-center gap-2 group flex-shrink-0">
-              <svg width="36" height="36" viewBox="0 0 36 36" fill="none" className="drop-shadow-[0_0_6px_rgba(160,90,90,0.25)] dark:drop-shadow-[0_0_6px_rgba(240,200,110,0.3)]">
-                <rect width="36" height="36" rx="10" fill="var(--gold)"/>
-                <path d="M18 27C18 27 9 21 9 14.5C9 11 11.5 9 14.5 9C16.2 9 18 10.8 18 10.8C18 10.8 19.8 9 21.5 9C24.5 9 27 11 27 14.5C27 21 18 27 18 27Z" fill="#12090A"/>
-              </svg>
-              <span className="font-heading text-[1.15rem] font-semibold text-[var(--navy)] tracking-wide">
-                Harmonia
-              </span>
-            </Link>
+        {/* Desktop nav links */}
+        <div className="hidden md:flex items-center gap-6">
+          {navLinks.map(link => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="text-body-sm font-medium text-slate hover:text-gold dark:hover:text-gold-dark transition-colors"
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
 
-            {/* Desktop nav links */}
-            <ul className="hidden md:flex items-center gap-7 list-none">
-              {links.map(({ href, label }) => (
-                <li key={href}>
-                  <Link
-                    href={href}
-                    className="text-[0.9rem] font-medium text-[var(--slate)] hover:text-[var(--maroon)] dark:hover:text-[var(--gold)] transition-colors duration-200 hover:[text-shadow:0_0_20px_rgba(114,47,55,0.3)] dark:hover:[text-shadow:0_0_20px_rgba(240,200,110,0.4)] whitespace-nowrap"
-                  >
-                    {label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+        {/* Right side: phase badge + theme toggle + notifications + avatar + mobile hamburger */}
+        <div className="flex items-center gap-3">
+          {/* Current phase badge — desktop only */}
+          <span className="hidden lg:inline-block harmonia-badge text-[0.65rem]">
+            {PHASE_LABELS[phase]}
+          </span>
 
-            {/* Right controls */}
-            <div className="flex items-center gap-4">
-              <ThemeToggle />
+          {/* Theme toggle */}
+          <button
+            onClick={toggleTheme}
+            className="touch-target flex items-center justify-center text-slate hover:text-gold transition-colors"
+            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
 
-              {isAuthenticated && user ? (
-                <Link
-                  href="/settings"
-                  className="hidden md:flex w-9 h-9 rounded-full bg-[var(--gold)] items-center justify-center text-[0.7rem] font-bold text-[#12090A] hover:bg-[var(--gold-champagne)] transition-colors"
-                  aria-label="Account settings"
-                >
-                  {user.firstName[0]}{user.lastName[0]}
-                </Link>
-              ) : (
-                <Link
-                  href="/register"
-                  className="hidden md:inline-flex btn-harmonia-primary text-[0.9rem] px-5 py-2 rounded-[4px]"
-                >
-                  Apply now
-                </Link>
-              )}
+          {/* Notification bell */}
+          <button
+            className="touch-target flex items-center justify-center text-slate hover:text-gold transition-colors relative"
+            aria-label="Notifications"
+          >
+            <Bell size={18} />
+            {/* Unread indicator dot */}
+            <span className="absolute top-1 right-1 w-2 h-2 bg-gold rounded-full" />
+          </button>
 
-              {/* Hamburger */}
-              <button
-                className="md:hidden flex flex-col justify-around w-7 h-[22px] bg-transparent border-none cursor-pointer p-0 z-[1005]"
-                onClick={() => setMobileOpen(true)}
-                aria-label="Open menu"
-              >
-                <span className="block w-full h-0.5 bg-[var(--maroon)] dark:bg-[var(--gold)] rounded transition-all duration-300" />
-                <span className="block w-full h-0.5 bg-[var(--maroon)] dark:bg-[var(--gold)] rounded transition-all duration-300" />
-                <span className="block w-full h-0.5 bg-[var(--maroon)] dark:bg-[var(--gold)] rounded transition-all duration-300" />
-              </button>
+          {/* User avatar — desktop */}
+          {user && (
+            <div className="hidden md:flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full bg-maroon-light dark:bg-dark-border flex items-center justify-center text-caption font-bold text-maroon dark:text-gold">
+                {user.firstName[0]}
+              </div>
             </div>
-          </div>
+          )}
+
+          {/* Mobile hamburger */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden touch-target flex items-center justify-center text-slate"
+            aria-label="Menu"
+          >
+            {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
         </div>
       </nav>
 
-      <MobileMenu open={mobileOpen} onClose={() => setMobileOpen(false)} />
+      {/* Mobile menu */}
+      <MobileMenu
+        open={mobileMenuOpen}
+        onClose={() => setMobileMenuOpen(false)}
+        links={navLinks}
+      />
+
+      {/* Spacer so content doesn't hide behind fixed nav */}
+      <div className="h-14 safe-top" />
     </>
   )
 }

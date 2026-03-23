@@ -1,17 +1,18 @@
 'use client'
 
-import React, { createContext, useContext, useState } from 'react'
+import { createContext, useState, useCallback, type ReactNode } from 'react'
 import type { Phase, DevModeState } from '@/types'
 
 interface PhaseContextValue {
-  currentPhase: Phase
+  phase: Phase
   setPhase: (phase: Phase) => void
   devMode: DevModeState
-  setDevMode: (updates: Partial<DevModeState>) => void
   toggleDevMode: () => void
+  setDevUserType: (type: DevModeState['userType']) => void
+  setShowEloOverlay: (show: boolean) => void
 }
 
-const DEFAULT_DEV_MODE: DevModeState = {
+const DEFAULT_DEV_STATE: DevModeState = {
   enabled: false,
   currentPhase: 'phase2',
   userType: 'london_with_kit',
@@ -20,43 +21,48 @@ const DEFAULT_DEV_MODE: DevModeState = {
   simulatedEloScores: {},
 }
 
-const PhaseContext = createContext<PhaseContextValue | undefined>(undefined)
+export const PhaseContext = createContext<PhaseContextValue>({
+  phase: 'phase2',
+  setPhase: () => {},
+  devMode: DEFAULT_DEV_STATE,
+  toggleDevMode: () => {},
+  setDevUserType: () => {},
+  setShowEloOverlay: () => {},
+})
 
-export function PhaseProvider({ children }: { children: React.ReactNode }) {
-  const [currentPhase, setCurrentPhase] = useState<Phase>('phase2')
-  const [devMode, setDevModeState] = useState<DevModeState>(DEFAULT_DEV_MODE)
+export function PhaseProvider({ children }: { children: ReactNode }) {
+  const [phase, setPhase] = useState<Phase>('phase2') // default to Phase 2 for dev
+  const [devMode, setDevMode] = useState<DevModeState>(DEFAULT_DEV_STATE)
 
-  function setPhase(phase: Phase) {
-    setCurrentPhase(phase)
-    if (devMode.enabled) {
-      setDevModeState((prev) => ({ ...prev, currentPhase: phase }))
-    }
-  }
+  const toggleDevMode = useCallback(() => {
+    setDevMode(prev => ({ ...prev, enabled: !prev.enabled }))
+  }, [])
 
-  function setDevMode(updates: Partial<DevModeState>) {
-    setDevModeState((prev) => {
-      const next = { ...prev, ...updates }
-      // Sync current phase with dev mode phase
-      if (updates.currentPhase) {
-        setCurrentPhase(updates.currentPhase)
-      }
-      return next
-    })
-  }
+  const setDevUserType = useCallback((type: DevModeState['userType']) => {
+    setDevMode(prev => ({ ...prev, userType: type }))
+  }, [])
 
-  function toggleDevMode() {
-    setDevModeState((prev) => ({ ...prev, enabled: !prev.enabled }))
+  const setShowEloOverlay = useCallback((show: boolean) => {
+    setDevMode(prev => ({ ...prev, showEloOverlay: show }))
+  }, [])
+
+  // Keyboard shortcut: Ctrl+Shift+D toggles dev mode
+  if (typeof window !== 'undefined') {
+    // Registered once via useEffect in the consuming component
   }
 
   return (
-    <PhaseContext.Provider value={{ currentPhase, setPhase, devMode, setDevMode, toggleDevMode }}>
+    <PhaseContext.Provider
+      value={{
+        phase,
+        setPhase,
+        devMode,
+        toggleDevMode,
+        setDevUserType,
+        setShowEloOverlay,
+      }}
+    >
       {children}
     </PhaseContext.Provider>
   )
-}
-
-export function usePhaseContext(): PhaseContextValue {
-  const ctx = useContext(PhaseContext)
-  if (!ctx) throw new Error('usePhaseContext must be used inside PhaseProvider')
-  return ctx
 }

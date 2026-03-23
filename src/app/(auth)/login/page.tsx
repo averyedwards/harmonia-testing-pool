@@ -1,15 +1,22 @@
-import { AppShell } from '@/components/layout/AppShell'
+'use client'
 
-export default function Page() {
+import { useRouter } from 'next/navigation'
+import { AuthLayout } from '@/components/auth/AuthLayout'
+import { LoginForm } from '@/components/auth/LoginForm'
+
+export default function LoginPage() {
+  const router = useRouter()
+
+  function handleLoginSuccess() {
+    router.push('/dashboard')
+  }
+
   return (
-    <AppShell>
-      <div className="harmonia-container py-16 min-h-screen">
-        <div className="max-w-lg mx-auto text-center">
-          <h1 className="font-heading text-h1 text-[var(--navy)] mb-4">Sign in</h1>
-          <p className="text-body text-[var(--slate)]">Built in Step 4: Authentication Screens.</p>
-          <p className="text-caption text-[var(--gold)] mt-6 font-semibold">Coming in a later step</p>
-        </div>
-      </div>
-    </AppShell>
+    <AuthLayout
+      title="Welcome back"
+      subtitle="Sign in to continue to the testing pool."
+    >
+      <LoginForm onSuccess={handleLoginSuccess} />
+    </AuthLayout>
   )
 }

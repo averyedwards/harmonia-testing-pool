@@ -1,0 +1,10 @@
+[
+  { "id": "notif-001", "type": "phase_transition", "title": "Phase 2 is live", "body": "The tournament is now open. Compare matches and discover who you connect with.", "read": false, "createdAt": "2026-03-15T09:00:00Z", "actionUrl": "/tournament" },
+  { "id": "notif-002", "type": "match_confirmed", "title": "You have a new match!", "body": "Someone matched with you. View your match and decide what to share.", "read": false, "createdAt": "2026-03-16T14:30:00Z", "actionUrl": "/match/match-001" },
+  { "id": "notif-003", "type": "calibration_reminder", "title": "Your profile is almost complete", "body": "Complete face calibration to get personalised matches. It takes 2 minutes.", "read": true, "createdAt": "2026-03-08T10:00:00Z", "actionUrl": "/calibration" },
+  { "id": "notif-004", "type": "insights_ready", "title": "Your Phase 1 insights are ready", "body": "See your visual preference profile and personality breakdown.", "read": true, "createdAt": "2026-03-14T08:00:00Z", "actionUrl": "/insights/phase1" },
+  { "id": "notif-005", "type": "we_met_survey", "title": "How did it go?", "body": "It has been a few days since you connected. Let us know if you met up.", "read": false, "createdAt": "2026-03-20T09:00:00Z", "actionUrl": "/survey/match-001" },
+  { "id": "notif-006", "type": "community_update", "title": "Community update", "body": "89% of users have completed calibration. Phase 2 launching soon.", "read": true, "createdAt": "2026-03-12T12:00:00Z", "actionUrl": "/dashboard" },
+  { "id": "notif-007", "type": "kit_status_update", "title": "Your DNA kit has been dispatched", "body": "Your MyHeritage kit is on its way. Check the portal for tracking details.", "read": true, "createdAt": "2026-03-10T16:00:00Z", "actionUrl": "/settings" },
+  { "id": "notif-008", "type": "insights_ready", "title": "Your Phase 2 insights are ready", "body": "See how personality influenced your tournament choices.", "read": false, "createdAt": "2026-03-19T08:00:00Z", "actionUrl": "/insights/phase2" }
+]

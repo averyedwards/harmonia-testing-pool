@@ -1,80 +1,78 @@
 'use client'
 
-import * as React from 'react'
-import { X } from 'lucide-react'
+import { useEffect, useCallback, type ReactNode } from 'react'
 import { cn } from '@/lib/utils'
 
 interface ModalProps {
   open: boolean
   onClose: () => void
-  title?: string
-  description?: string
-  children: React.ReactNode
+  children: ReactNode
   className?: string
+  closable?: boolean // can be dismissed by clicking backdrop or pressing Escape
 }
 
-export function Modal({ open, onClose, title, description, children, className }: ModalProps) {
-  // Close on Escape key
-  React.useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose()
-    }
+export function Modal({ open, onClose, children, className, closable = true }: ModalProps) {
+  const handleEscape = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && closable) onClose()
+    },
+    [onClose, closable]
+  )
+
+  useEffect(() => {
     if (open) {
-      document.addEventListener('keydown', handler)
+      document.addEventListener('keydown', handleEscape)
       document.body.style.overflow = 'hidden'
     }
     return () => {
-      document.removeEventListener('keydown', handler)
+      document.removeEventListener('keydown', handleEscape)
       document.body.style.overflow = ''
     }
-  }, [open, onClose])
+  }, [open, handleEscape])
 
   if (!open) return null
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-4"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby={title ? 'modal-title' : undefined}
-    >
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-black/40 backdrop-blur-sm"
-        onClick={onClose}
-        aria-hidden="true"
+        className="absolute inset-0 bg-black/50 backdrop-blur-sm animate-fade-in"
+        onClick={closable ? onClose : undefined}
       />
-
-      {/* Panel */}
+      {/* Content */}
       <div
         className={cn(
-          'relative w-full max-w-md bg-[var(--card-bg)] rounded-card shadow-card-hover p-6 animate-slide-up',
+          'relative z-10 w-full max-w-md bg-cream dark:bg-dark-surface rounded-card shadow-xl animate-slide-up',
+          'p-6',
           className
         )}
       >
-        {/* Close button */}
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 text-[var(--slate)] hover:text-[var(--navy)] touch-target flex items-center justify-center"
-          aria-label="Close"
-        >
-          <X size={20} />
-        </button>
-
-        {title && (
-          <h2
-            id="modal-title"
-            className="font-heading text-h3 text-[var(--navy)] mb-1 pr-8"
-          >
-            {title}
-          </h2>
-        )}
-        {description && (
-          <p className="text-body-sm text-[var(--slate)] mb-4">{description}</p>
-        )}
-
         {children}
       </div>
+    </div>
+  )
+}
+
+export function ModalTitle({ children, className }: { children: ReactNode; className?: string }) {
+  return (
+    <h2 className={cn('font-heading text-h3 text-navy dark:text-cream mb-2', className)}>
+      {children}
+    </h2>
+  )
+}
+
+export function ModalDescription({ children, className }: { children: ReactNode; className?: string }) {
+  return (
+    <p className={cn('text-body text-slate mb-4', className)}>
+      {children}
+    </p>
+  )
+}
+
+export function ModalActions({ children, className }: { children: ReactNode; className?: string }) {
+  return (
+    <div className={cn('flex gap-3 justify-end mt-4', className)}>
+      {children}
     </div>
   )
 }

@@ -1,60 +1,58 @@
-import * as React from 'react'
+import { forwardRef, type TextareaHTMLAttributes } from 'react'
 import { cn } from '@/lib/utils'
 import { wordCount } from '@/lib/utils'
 
-export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string
   error?: string
-  hint?: string
   showWordCount?: boolean
   minWords?: number
   maxWords?: number
 }
 
-const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
-  ({ className, label, error, hint, showWordCount, minWords, maxWords, id, value, onChange, ...props }, ref) => {
-    const textareaId = id || label?.toLowerCase().replace(/\s+/g, '-')
+export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
+  ({ className, label, error, showWordCount, minWords = 0, maxWords = Infinity, value, id, ...props }, ref) => {
     const currentWords = typeof value === 'string' ? wordCount(value) : 0
-    const isUnderMin = minWords !== undefined && currentWords < minWords
-    const isOverMax = maxWords !== undefined && currentWords > maxWords
+    const tooShort = minWords > 0 && currentWords < minWords && currentWords > 0
+    const tooLong = maxWords < Infinity && currentWords > maxWords
 
     return (
-      <div className="flex flex-col gap-1.5">
+      <div className="w-full">
         {label && (
-          <label htmlFor={textareaId} className="text-body-sm font-semibold text-[var(--navy)]">
+          <label
+            htmlFor={id}
+            className="block text-body-sm font-medium text-navy dark:text-slate mb-1.5"
+          >
             {label}
           </label>
         )}
         <textarea
-          id={textareaId}
-          className={cn(
-            'harmonia-input resize-none min-h-[120px]',
-            (error || isOverMax) && 'border-red-500 focus:border-red-500',
-            className
-          )}
+          id={id}
           ref={ref}
           value={value}
-          onChange={onChange}
+          className={cn(
+            'harmonia-input min-h-[120px] resize-y',
+            error && 'border-red-500 focus:ring-red-200',
+            tooLong && 'border-red-500',
+            className
+          )}
           {...props}
         />
-        <div className="flex justify-between items-center">
-          <div>
-            {error && (
-              <p className="text-caption text-red-600" role="alert">{error}</p>
-            )}
-            {hint && !error && (
-              <p className="text-caption text-[var(--slate)]">{hint}</p>
-            )}
-          </div>
+        <div className="flex justify-between mt-1">
+          {error && (
+            <p className="text-caption text-red-600 dark:text-red-400">{error}</p>
+          )}
           {showWordCount && (
-            <p className={cn(
-              'text-caption ml-auto',
-              isOverMax ? 'text-red-600' :
-              isUnderMin ? 'text-[var(--slate)]' :
-              'text-[var(--gold)]'
-            )}>
-              {currentWords}{maxWords ? `/${maxWords}` : ''} words
-              {minWords && currentWords < minWords && ` (min ${minWords})`}
+            <p
+              className={cn(
+                'text-caption ml-auto',
+                tooShort && 'text-amber-600 dark:text-amber-400',
+                tooLong && 'text-red-600 dark:text-red-400',
+                !tooShort && !tooLong && 'text-slate'
+              )}
+            >
+              {currentWords}{maxWords < Infinity ? `/${maxWords}` : ''} words
+              {tooShort && ` (min ${minWords})`}
             </p>
           )}
         </div>
@@ -63,5 +61,3 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   }
 )
 Textarea.displayName = 'Textarea'
-
-export { Textarea }

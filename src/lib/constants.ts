@@ -1,75 +1,86 @@
-import type { Phase } from '@/types'
+import { type SinName, type Phase } from '@/types'
 
-/** App-wide route constants */
-export const ROUTES = {
-  HOME: '/',
-  LOGIN: '/login',
-  REGISTER: '/register',
-  VERIFY_EMAIL: '/verify-email',
-  FORGOT_PASSWORD: '/forgot-password',
-  ONBOARDING: '/onboarding',
-  DASHBOARD: '/dashboard',
-  CALIBRATION: '/calibration',
-  TOURNAMENT: '/tournament',
-  TOURNAMENT_PHASE3: '/tournament-phase3',
-  MATCH: (matchId: string) => `/match/${matchId}`,
-  SURVEY: (matchId: string) => `/survey/${matchId}`,
-  INSIGHTS: '/insights',
-  INSIGHTS_PHASE1: '/insights/phase1',
-  INSIGHTS_PHASE2: '/insights/phase2',
-  INSIGHTS_PHASE3: '/insights/phase3',
-  SETTINGS: '/settings',
-  ADMIN: '/admin',
-  ADMIN_USERS: '/admin/users',
-  ADMIN_PHASES: '/admin/phases',
-  ADMIN_KITS: '/admin/kits',
-  ADMIN_GENDER_RATIO: '/admin/gender-ratio',
-  ADMIN_EXPORT: '/admin/export',
-} as const
+// --- PHASE LABELS ---
 
-/** Phase display labels */
 export const PHASE_LABELS: Record<Phase, string> = {
-  onboarding: 'Onboarding',
+  onboarding: 'Getting Started',
   phase1: 'Phase 1: Calibration',
-  between_1_2: 'Between Phases',
+  between_1_2: 'Awaiting Phase 2',
   phase2: 'Phase 2: Tournament',
-  between_2_3: 'Between Phases',
+  between_2_3: 'Awaiting Phase 3',
   phase3: 'Phase 3: Genetics',
   complete: 'Complete',
 }
 
-/** Seven Deadly Sins display metadata */
-export const SIN_LABELS = {
-  wrath: 'Wrath',
-  sloth: 'Sloth',
-  pride: 'Pride',
-  lust: 'Lust',
-  greed: 'Greed',
-  gluttony: 'Gluttony',
-  envy: 'Envy',
+export const PHASE_DESCRIPTIONS: Record<Phase, string> = {
+  onboarding: 'Set up your profile and teach us your preferences.',
+  phase1: 'Rate faces to build your personalised visual model.',
+  between_1_2: 'Your calibration is complete. Phase 2 launches soon.',
+  phase2: 'Compare matches and discover who you connect with.',
+  between_2_3: 'Phase 2 complete. Phase 3 launches for London participants.',
+  phase3: 'Genetics added. See how chemistry changes your choices.',
+  complete: 'All phases complete. View your full insights report.',
+}
+
+// --- ONBOARDING ---
+
+export const ONBOARDING_STEPS = [
+  { number: 1, label: 'Verify Email', shortLabel: 'Email', estimatedTime: '1 min' },
+  { number: 2, label: 'Basic Profile', shortLabel: 'Profile', estimatedTime: '30 sec' },
+  { number: 3, label: 'Preferences', shortLabel: 'Prefs', estimatedTime: '30 sec' },
+  { number: 4, label: 'Upload Photo', shortLabel: 'Photo', estimatedTime: '1 min' },
+  { number: 5, label: 'Personality', shortLabel: 'Questions', estimatedTime: '5-10 min' },
+  { number: 6, label: 'Face Calibration', shortLabel: 'Calibrate', estimatedTime: '2-3 min' },
+  { number: 7, label: 'DNA Kit Address', shortLabel: 'Address', estimatedTime: '1 min' },
+] as const
+
+export const ONBOARDING_MATCHING_POOL_STEP = 4 // user enters matching pool after this step
+
+// --- QUESTIONNAIRE ---
+
+export const MIN_WORDS = 25
+export const MAX_WORDS = 150
+
+// --- CALIBRATION ---
+
+export const CALIBRATION_REAL_USER_COUNT = 5 // first 5 faces are real testing pool users
+export const CALIBRATION_MINIMUM_RATINGS = 5
+export const GRADUATION_THRESHOLD = 12 // ratings needed before face graduates from testing pool
+
+// --- TOURNAMENT ---
+
+export const HEARTS_TO_MATCH = 3
+export const PASS_BOTH_MAX_PER_SESSION = 3
+export const MUTUAL_POOL_THRESHOLD = 3.5 // MetaFBP predicted score threshold for mutual pool
+export const MUTUAL_POOL_FALLBACK_THRESHOLD = 3.0 // if pool < 6 at 3.5
+export const MUTUAL_POOL_MINIMUM_SIZE = 6 // below this, show pool-building UI
+
+// Elo constants (CurmElo: Sankaran et al. 2021)
+export const ELO_K = 20
+export const ELO_R0 = 1000
+export const ELO_RD = 400
+export const ELO_CONVERGENCE_TARGET = 30 // comparisons per candidate for stable ranking
+
+// --- PERSONALITY DISPLAY ---
+
+export const SIMILARITY_TIERS = {
+  strong_fit: { threshold: 0.60, headline: 'Strong personality match!', maxTraits: 4 },
+  good_fit: { threshold: 0.40, headline: 'You have a lot in common', maxTraits: 3 },
+  moderate_fit: { threshold: 0.25, headline: 'Some shared traits', maxTraits: 2 },
+  low_fit: { threshold: 0, headline: 'Different perspectives, potential spark', maxTraits: 1 },
 } as const
 
-export const SIN_VIRTUE_LABELS = {
-  wrath: 'Conflict avoidant',
-  sloth: 'Proactive',
-  pride: 'Humble',
-  lust: 'Restrained',
-  greed: 'Generous',
-  gluttony: 'Moderate',
-  envy: 'Content',
-} as const
+export const SIN_WEIGHTS: Record<SinName, number> = {
+  wrath: 1.5,
+  sloth: 1.3,
+  pride: 1.2,
+  lust: 1.0,
+  greed: 0.9,
+  gluttony: 0.8,
+  envy: 0.7,
+}
 
-export const SIN_VICE_LABELS = {
-  wrath: 'Confrontational',
-  sloth: 'Avoidant',
-  pride: 'Ego-driven',
-  lust: 'Impulsive',
-  greed: 'Materialistic',
-  gluttony: 'Indulgent',
-  envy: 'Competitive',
-} as const
-
-export const SIN_COLORS = {
+export const SIN_COLORS: Record<SinName, string> = {
   wrath: '#E74C3C',
   sloth: '#9B59B6',
   pride: '#D4A853',
@@ -77,77 +88,60 @@ export const SIN_COLORS = {
   greed: '#2ECC71',
   gluttony: '#F39C12',
   envy: '#3498DB',
+}
+
+export const SIN_LABELS: Record<SinName, { virtue: string; vice: string }> = {
+  wrath: { virtue: 'Conflict avoidant', vice: 'Confrontational' },
+  sloth: { virtue: 'Proactive', vice: 'Avoidant' },
+  pride: { virtue: 'Humble', vice: 'Ego-driven' },
+  lust: { virtue: 'Restrained', vice: 'Impulsive' },
+  greed: { virtue: 'Generous', vice: 'Materialistic' },
+  gluttony: { virtue: 'Moderate', vice: 'Indulgent' },
+  envy: { virtue: 'Content', vice: 'Competitive' },
+}
+
+// --- HLA DISPLAY ---
+
+export const HLA_DISPLAY_TIERS = {
+  strong: { minScore: 75, label: 'Strong chemistry signal', color: '#4CAF50' },
+  good: { minScore: 50, label: 'Good chemistry', color: '#FF9800' },
+  some: { minScore: 25, label: 'Some chemistry', color: '#9E9E9E' },
+  hidden: { minScore: 0, label: '', color: 'transparent' }, // never show negative
 } as const
 
-/** Perceived similarity tier config */
-export const SIMILARITY_TIERS = {
-  strong_fit: {
-    min: 0.6,
-    headline: 'Strong personality match!',
-    traitCount: 4,
-  },
-  good_fit: {
-    min: 0.4,
-    headline: 'You have a lot in common',
-    traitCount: 3,
-  },
-  moderate_fit: {
-    min: 0.25,
-    headline: 'Some shared traits',
-    traitCount: 2,
-  },
-  low_fit: {
-    min: 0,
-    headline: 'Different perspectives, potential spark',
-    traitCount: 1,
-  },
+export function getHlaDisplayTier(score: number | null): keyof typeof HLA_DISPLAY_TIERS {
+  if (score === null) return 'hidden'
+  if (score >= 75) return 'strong'
+  if (score >= 50) return 'good'
+  if (score >= 25) return 'some'
+  return 'hidden'
+}
+
+// --- WTM WEIGHTS (V4.1 corrected) ---
+
+export const WTM_WEIGHTS = {
+  visual: 0.60,
+  personality: 0.30,
+  genetics: 0.10,
 } as const
 
-/** HLA chemistry display config */
-export const HLA_TIERS = {
-  strong: { min: 75, label: 'Strong chemistry signal', emphasis: 'high' },
-  good: { min: 50, label: 'Good chemistry', emphasis: 'normal' },
-  some: { min: 25, label: 'Some chemistry', emphasis: 'subtle' },
-  hidden: { min: 0, label: '', emphasis: 'hidden' },
+export const WTM_WEIGHTS_NO_HLA = {
+  visual: 0.67, // 60/90 * 100
+  personality: 0.33, // 30/90 * 100
+  genetics: 0,
 } as const
 
-/** Tournament constants */
-export const TOURNAMENT = {
-  HEARTS_TO_MATCH: 3,
-  MIN_POOL_SIZE: 6,
-  MAX_PASS_BOTHS_PER_SESSION: 3,
-  ELO_K: 20,
-  ELO_START: 1000,
-  ELO_RD: 400,
-} as const
+// --- "WE MET" SURVEY ---
 
-/** Questionnaire word limits */
-export const QUESTIONNAIRE = {
-  MIN_WORDS: 25,
-  MAX_WORDS: 150,
-  QUESTION_COUNT: 6,
-} as const
+export const WE_MET_TRIGGER_DAYS = 4 // days after contact exchange
+export const WE_MET_INTEREST_SCALE_MIN = 1
+export const WE_MET_INTEREST_SCALE_MAX = 7
 
-/** Onboarding steps */
-export const ONBOARDING_STEPS = [
-  { step: 1, label: 'Email Verified', path: '/verify-email' },
-  { step: 2, label: 'Basic Profile', path: '/onboarding?step=2' },
-  { step: 3, label: 'Preferences', path: '/onboarding?step=3' },
-  { step: 4, label: 'Photo', path: '/onboarding?step=4' },
-  { step: 5, label: 'Personality', path: '/onboarding?step=5' },
-  { step: 6, label: 'Calibration', path: '/onboarding?step=6' },
-  { step: 7, label: 'DNA Kit', path: '/onboarding?step=7' },
-] as const
+// --- CONTACT TYPES ---
 
-/** DNA kit max allocation */
-export const KIT_MAX = 200
-
-/** App metadata */
-export const APP_META = {
-  NAME: 'Harmonia Testing Pool',
-  SHORT_NAME: 'Harmonia',
-  DESCRIPTION: 'Three-signal compatibility matching experiment',
-  URL: 'https://app.harmoniaengine.com',
-  THEME_COLOR: '#D4A853',
-  BACKGROUND_COLOR: '#FAF6F1',
+export const CONTACT_TYPE_LABELS = {
+  phone: 'Phone Number',
+  instagram: 'Instagram',
+  email: 'Email Address',
+  prefer_not_to_share: 'Prefer not to share yet',
 } as const

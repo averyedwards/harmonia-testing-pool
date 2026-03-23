@@ -49,6 +49,7 @@ const config: Config = {
           med: '#2C3E50',
         },
         slate: '#475569',
+        'gray-light': '#E8E0D8',
 
         // Semantic colours for the testing pool
         chemistry: {

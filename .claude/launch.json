@@ -2,11 +2,10 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "Harmonia Testing Pool (Next.js Dev)",
-      "runtimeExecutable": "C:\\Program Files\\Microsoft Visual Studio\\18\\Insiders\\MSBuild\\Microsoft\\VisualStudio\\NodeJs\\npm.cmd",
+      "name": "harmonia-dev",
+      "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
-      "port": 3000,
-      "cwd": "C:\\Users\\porte\\OneDrive\\Desktop\\Testing Pool Claude Code\\harmonia-testing-pool"
+      "port": 3000
     }
   ]
 }

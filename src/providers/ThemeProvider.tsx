@@ -1,6 +1,6 @@
 'use client'
 
-import React, { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useCallback, useEffect, useState, type ReactNode } from 'react'
 
 type Theme = 'light' | 'dark'
 
@@ -10,44 +10,52 @@ interface ThemeContextValue {
   setTheme: (theme: Theme) => void
 }
 
-const ThemeContext = createContext<ThemeContextValue | undefined>(undefined)
+export const ThemeContext = createContext<ThemeContextValue>({
+  theme: 'light',
+  toggleTheme: () => {},
+  setTheme: () => {},
+})
 
-export function ThemeProvider({ children }: { children: React.ReactNode }) {
+export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setThemeState] = useState<Theme>('light')
   const [mounted, setMounted] = useState(false)
 
+  // On mount: check localStorage, then system preference
   useEffect(() => {
-    // On mount: read from localStorage or system preference
     const stored = localStorage.getItem('harmonia-theme') as Theme | null
     if (stored === 'light' || stored === 'dark') {
       setThemeState(stored)
-      applyTheme(stored)
-    } else {
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-      const initial: Theme = prefersDark ? 'dark' : 'light'
-      setThemeState(initial)
-      applyTheme(initial)
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      setThemeState('dark')
     }
     setMounted(true)
   }, [])
 
-  function applyTheme(t: Theme) {
+  // Apply theme class to html element (Tailwind dark mode strategy)
+  useEffect(() => {
+    if (!mounted) return
     const root = document.documentElement
-    if (t === 'dark') {
+    if (theme === 'dark') {
       root.classList.add('dark')
+      root.setAttribute('data-theme', 'dark')
     } else {
       root.classList.remove('dark')
+      root.removeAttribute('data-theme')
     }
-  }
+  }, [theme, mounted])
 
-  function setTheme(t: Theme) {
-    setThemeState(t)
-    applyTheme(t)
-    localStorage.setItem('harmonia-theme', t)
-  }
+  const setTheme = useCallback((newTheme: Theme) => {
+    setThemeState(newTheme)
+    localStorage.setItem('harmonia-theme', newTheme)
+  }, [])
 
-  function toggleTheme() {
+  const toggleTheme = useCallback(() => {
     setTheme(theme === 'light' ? 'dark' : 'light')
+  }, [theme, setTheme])
+
+  // Prevent flash of wrong theme on SSR
+  if (!mounted) {
+    return <div style={{ visibility: 'hidden' }}>{children}</div>
   }
 
   return (
@@ -55,10 +63,4 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       {children}
     </ThemeContext.Provider>
   )
-}
-
-export function useThemeContext(): ThemeContextValue {
-  const ctx = useContext(ThemeContext)
-  if (!ctx) throw new Error('useThemeContext must be used inside ThemeProvider')
-  return ctx
 }

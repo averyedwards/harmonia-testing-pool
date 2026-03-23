@@ -3,7 +3,6 @@
 import { useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/hooks/useAuth'
-import { AppShell } from '@/components/layout/AppShell'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 
@@ -149,19 +148,19 @@ function RadarChart() {
 
 // ─── Main Page ────────────────────────────────────────────────────────────────
 export default function HomePage() {
-  const { isAuthenticated, user } = useAuth()
+  const { isLoggedIn, user } = useAuth()
   const router = useRouter()
 
   useEffect(() => {
-    if (isAuthenticated && user) {
+    if (isLoggedIn && user) {
       router.push(user.onboardingStep < 7 ? '/onboarding' : '/dashboard')
     }
-  }, [isAuthenticated, user, router])
+  }, [isLoggedIn, user, router])
 
-  if (isAuthenticated) return null
+  if (isLoggedIn) return null
 
   return (
-    <AppShell>
+    <>
       {/* ── Hero ──────────────────────────────────────────────────────────── */}
       <section
         id="hero"
@@ -499,6 +498,6 @@ export default function HomePage() {
           </Link>
         </div>
       </section>
-    </AppShell>
+    </>
   )
 }

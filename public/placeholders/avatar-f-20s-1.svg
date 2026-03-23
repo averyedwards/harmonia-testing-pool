@@ -1,0 +1,16 @@
+<svg width="400" height="500" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="500" fill="#F5EDE6"/>
+  <!-- Body/shoulders -->
+  <ellipse cx="200" cy="480" rx="140" ry="90" fill="#D4A853" opacity="0.3"/>
+  <rect x="130" y="360" width="140" height="160" rx="20" fill="#D4A853" opacity="0.25"/>
+  <!-- Neck -->
+  <rect x="182" y="295" width="36" height="75" rx="12" fill="#C8A882"/>
+  <!-- Head -->
+  <ellipse cx="200" cy="240" rx="80" ry="90" fill="#C8A882"/>
+  <!-- Hair - long -->
+  <path d="M128 200 Q120 280 130 370 Q160 400 200 395 Q240 400 270 370 Q280 280 272 200 Q240 150 200 145 Q160 150 128 200Z" fill="#5C3A2A"/>
+  <!-- Features -->
+  <ellipse cx="176" cy="235" rx="8" ry="9" fill="#5C3A2A" opacity="0.8"/>
+  <ellipse cx="224" cy="235" rx="8" ry="9" fill="#5C3A2A" opacity="0.8"/>
+  <path d="M185 268 Q200 278 215 268" stroke="#8B4A3A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+</svg>

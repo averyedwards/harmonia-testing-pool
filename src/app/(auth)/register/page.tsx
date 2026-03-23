@@ -1,15 +1,22 @@
-import { AppShell } from '@/components/layout/AppShell'
+'use client'
 
-export default function Page() {
+import { useRouter } from 'next/navigation'
+import { AuthLayout } from '@/components/auth/AuthLayout'
+import { RegisterForm } from '@/components/auth/RegisterForm'
+
+export default function RegisterPage() {
+  const router = useRouter()
+
+  function handleRegisterSuccess(email: string) {
+    router.push(`/verify-email?email=${encodeURIComponent(email)}`)
+  }
+
   return (
-    <AppShell>
-      <div className="harmonia-container py-16 min-h-screen">
-        <div className="max-w-lg mx-auto text-center">
-          <h1 className="font-heading text-h1 text-[var(--navy)] mb-4">Create account</h1>
-          <p className="text-body text-[var(--slate)]">Built in Step 4: Authentication Screens.</p>
-          <p className="text-caption text-[var(--gold)] mt-6 font-semibold">Coming in a later step</p>
-        </div>
-      </div>
-    </AppShell>
+    <AuthLayout
+      title="Join the testing pool"
+      subtitle="Create your account to get started."
+    >
+      <RegisterForm onSuccess={handleRegisterSuccess} />
+    </AuthLayout>
   )
 }

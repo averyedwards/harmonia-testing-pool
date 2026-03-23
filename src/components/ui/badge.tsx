@@ -1,34 +1,27 @@
-import * as React from 'react'
+import { type HTMLAttributes } from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/utils'
 
 const badgeVariants = cva(
-  'inline-flex items-center rounded-badge font-semibold text-caption uppercase tracking-wider',
+  'inline-flex items-center font-semibold text-caption tracking-wide uppercase',
   {
     variants: {
       variant: {
-        gold: 'bg-[var(--gold-light)] text-[var(--gold)] px-3 py-1',
-        maroon: 'bg-[var(--maroon-light)] text-[var(--maroon)] px-3 py-1',
-        slate: 'bg-[var(--blush)] text-[var(--slate)] px-3 py-1',
-        success: 'bg-green-100 text-green-700 px-3 py-1 dark:bg-green-900/30 dark:text-green-400',
-        warning: 'bg-orange-100 text-orange-700 px-3 py-1 dark:bg-orange-900/30 dark:text-orange-400',
-        error: 'bg-red-100 text-red-700 px-3 py-1 dark:bg-red-900/30 dark:text-red-400',
+        default: 'harmonia-badge', // gold pill from index.html
+        success: 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400 px-3 py-1 rounded-badge',
+        warning: 'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400 px-3 py-1 rounded-badge',
+        error: 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400 px-3 py-1 rounded-badge',
+        phase: 'bg-maroon-light text-maroon dark:bg-gold-light dark:text-gold px-3 py-1 rounded-badge',
       },
     },
     defaultVariants: {
-      variant: 'gold',
+      variant: 'default',
     },
   }
 )
 
-export interface BadgeProps
-  extends React.HTMLAttributes<HTMLSpanElement>,
-    VariantProps<typeof badgeVariants> {}
+interface BadgeProps extends HTMLAttributes<HTMLSpanElement>, VariantProps<typeof badgeVariants> {}
 
-function Badge({ className, variant, ...props }: BadgeProps) {
-  return (
-    <span className={cn(badgeVariants({ variant }), className)} {...props} />
-  )
+export function Badge({ className, variant, ...props }: BadgeProps) {
+  return <span className={cn(badgeVariants({ variant }), className)} {...props} />
 }
-
-export { Badge, badgeVariants }

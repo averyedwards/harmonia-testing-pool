@@ -1,14 +1,20 @@
-import * as React from 'react'
+import { type HTMLAttributes } from 'react'
 import { cn } from '@/lib/utils'
 
-interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
-  goldTop?: boolean
+interface CardProps extends HTMLAttributes<HTMLDivElement> {
+  goldAccent?: boolean
+  hoverable?: boolean
 }
 
-function Card({ className, goldTop, children, ...props }: CardProps) {
+export function Card({ className, goldAccent, hoverable, children, ...props }: CardProps) {
   return (
     <div
-      className={cn('harmonia-card', goldTop && 'gold-accent-top', className)}
+      className={cn(
+        'harmonia-card',
+        goldAccent && 'gold-accent-top',
+        hoverable && 'hover:shadow-card-hover hover:-translate-y-0.5 cursor-pointer',
+        className
+      )}
       {...props}
     >
       {children}
@@ -16,47 +22,26 @@ function Card({ className, goldTop, children, ...props }: CardProps) {
   )
 }
 
-function CardHeader({ className, children, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+export function CardHeader({ className, children, ...props }: HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={cn('mb-4', className)} {...props}>
+    <div className={cn('mb-3', className)} {...props}>
       {children}
     </div>
   )
 }
 
-function CardTitle({ className, children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
+export function CardTitle({ className, children, ...props }: HTMLAttributes<HTMLHeadingElement>) {
   return (
-    <h3
-      className={cn('font-heading text-h3 text-[var(--navy)]', className)}
-      {...props}
-    >
+    <h3 className={cn('font-heading text-h3 text-navy dark:text-cream', className)} {...props}>
       {children}
     </h3>
   )
 }
 
-function CardDescription({ className, children, ...props }: React.HTMLAttributes<HTMLParagraphElement>) {
+export function CardContent({ className, children, ...props }: HTMLAttributes<HTMLDivElement>) {
   return (
-    <p className={cn('text-body-sm text-[var(--slate)]', className)} {...props}>
-      {children}
-    </p>
-  )
-}
-
-function CardContent({ className, children, ...props }: React.HTMLAttributes<HTMLDivElement>) {
-  return (
-    <div className={cn('', className)} {...props}>
+    <div className={cn('text-body text-slate', className)} {...props}>
       {children}
     </div>
   )
 }
-
-function CardFooter({ className, children, ...props }: React.HTMLAttributes<HTMLDivElement>) {
-  return (
-    <div className={cn('mt-4 flex items-center', className)} {...props}>
-      {children}
-    </div>
-  )
-}
-
-export { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
