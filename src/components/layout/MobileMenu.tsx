@@ -30,7 +30,7 @@ export function MobileMenu({ open, onClose, links }: MobileMenuProps) {
       {/* Backdrop */}
       <div
         className={cn(
-          'fixed inset-0 z-30 bg-black/40 backdrop-blur-sm transition-opacity duration-300 md:hidden',
+          'fixed inset-0 z-30 bg-black/40 transition-opacity duration-300 md:hidden',
           open ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         )}
         onClick={onClose}
