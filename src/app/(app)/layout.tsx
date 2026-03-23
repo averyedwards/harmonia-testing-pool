@@ -21,8 +21,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
     }
   }, [isLoggedIn, isHydrated, router])
 
-  // Wait for hydration so sessionStorage-restored auth state is applied first
-  if (!isHydrated || !isLoggedIn) return null
-
+  // Always render — SSR needs valid HTML to stream.
+  // Auth redirect fires via useEffect after hydration.
   return <AppShell>{children}</AppShell>
 }

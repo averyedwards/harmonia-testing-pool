@@ -25,8 +25,7 @@ export default function AdminGroupLayout({ children }: { children: React.ReactNo
     }
   }, [isLoggedIn, isAdmin, isHydrated, router])
 
-  // Wait for hydration so sessionStorage-restored role is applied before gating
-  if (!isHydrated || !isLoggedIn || !isAdmin) return null
-
+  // Always render — SSR needs valid HTML to stream.
+  // Auth/admin redirect fires via useEffect after hydration.
   return <AppShell>{children}</AppShell>
 }
