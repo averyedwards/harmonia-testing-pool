@@ -12,6 +12,7 @@ import { Badge } from '@/components/ui/badge'
 import { useToast } from '@/components/ui/toast'
 import { useRouter } from 'next/navigation'
 import { PHASE_LABELS } from '@/lib/constants'
+import { cn } from '@/lib/utils'
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -34,6 +35,25 @@ export default function SettingsPage() {
   const [emailNotifs, setEmailNotifs] = useState(true)
   const [pushNotifs, setPushNotifs] = useState(true)
   const [saving, setSaving] = useState(false)
+  const [categoryPrefs, setCategoryPrefs] = useState<Record<string, { push: boolean; email: boolean }>>({
+    phase_transition: { push: true, email: true },
+    match_confirmed: { push: true, email: true },
+    calibration_reminder: { push: true, email: true },
+    insights_ready: { push: true, email: true },
+    we_met_survey: { push: true, email: true },
+    community_update: { push: true, email: true },
+    kit_status_update: { push: true, email: true },
+  })
+
+  const NOTIFICATION_CATEGORIES = [
+    { key: 'phase_transition', label: 'Phase transitions', desc: 'When a new phase becomes available' },
+    { key: 'match_confirmed', label: 'New matches', desc: 'When someone matches with you' },
+    { key: 'calibration_reminder', label: 'Calibration reminders', desc: 'Reminders to complete face rating' },
+    { key: 'insights_ready', label: 'Insights ready', desc: 'When your phase insights are available' },
+    { key: 'we_met_survey', label: 'Survey reminders', desc: 'Post-meetup survey prompts' },
+    { key: 'community_update', label: 'Community updates', desc: 'Testing pool announcements' },
+    { key: 'kit_status_update', label: 'DNA kit updates', desc: 'Kit dispatch, delivery, and results' },
+  ]
 
   const handleSaveProfile = async () => {
     setSaving(true)
@@ -106,20 +126,62 @@ export default function SettingsPage() {
 
         {/* Notifications */}
         <Section title="Notifications">
-          <Card className="p-5 space-y-4">
-            <div className="flex items-center justify-between">
+          {/* Push master + categories */}
+          <Card className="p-5 mb-3">
+            <div className="flex items-center justify-between pb-3 border-b border-gray-light dark:border-dark-border">
+              <div>
+                <p className="text-body-sm font-medium text-navy dark:text-cream">Push notifications</p>
+                <p className="text-caption text-slate">Browser and home screen alerts</p>
+              </div>
+              <Toggle checked={pushNotifs} onChange={setPushNotifs} />
+            </div>
+            <div className={cn('space-y-3 pt-3', !pushNotifs && 'opacity-50 pointer-events-none')}>
+              {NOTIFICATION_CATEGORIES
+                .filter(cat => cat.key !== 'kit_status_update' || user?.isLondon)
+                .map(cat => (
+                  <div key={`push-${cat.key}`} className="flex items-start justify-between gap-3">
+                    <div>
+                      <p className="text-caption font-medium text-navy dark:text-cream">{cat.label}</p>
+                      <p className="text-[11px] text-slate/60">{cat.desc}</p>
+                    </div>
+                    <Toggle
+                      checked={categoryPrefs[cat.key]?.push ?? true}
+                      onChange={v => setCategoryPrefs(prev => ({
+                        ...prev, [cat.key]: { ...prev[cat.key], push: v }
+                      }))}
+                      disabled={!pushNotifs}
+                    />
+                  </div>
+                ))}
+            </div>
+          </Card>
+          {/* Email master + categories */}
+          <Card className="p-5">
+            <div className="flex items-center justify-between pb-3 border-b border-gray-light dark:border-dark-border">
               <div>
                 <p className="text-body-sm font-medium text-navy dark:text-cream">Email notifications</p>
-                <p className="text-caption text-slate">Phase updates, match confirmations</p>
+                <p className="text-caption text-slate">Sent to {user?.email}</p>
               </div>
               <Toggle checked={emailNotifs} onChange={setEmailNotifs} />
             </div>
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-body-sm font-medium text-navy dark:text-cream">Push notifications</p>
-                <p className="text-caption text-slate">In-app alerts</p>
-              </div>
-              <Toggle checked={pushNotifs} onChange={setPushNotifs} />
+            <div className={cn('space-y-3 pt-3', !emailNotifs && 'opacity-50 pointer-events-none')}>
+              {NOTIFICATION_CATEGORIES
+                .filter(cat => cat.key !== 'kit_status_update' || user?.isLondon)
+                .map(cat => (
+                  <div key={`email-${cat.key}`} className="flex items-start justify-between gap-3">
+                    <div>
+                      <p className="text-caption font-medium text-navy dark:text-cream">{cat.label}</p>
+                      <p className="text-[11px] text-slate/60">{cat.desc}</p>
+                    </div>
+                    <Toggle
+                      checked={categoryPrefs[cat.key]?.email ?? true}
+                      onChange={v => setCategoryPrefs(prev => ({
+                        ...prev, [cat.key]: { ...prev[cat.key], email: v }
+                      }))}
+                      disabled={!emailNotifs}
+                    />
+                  </div>
+                ))}
             </div>
           </Card>
         </Section>
