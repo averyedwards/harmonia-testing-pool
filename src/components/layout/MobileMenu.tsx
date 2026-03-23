@@ -39,7 +39,7 @@ export function MobileMenu({ open, onClose, links }: MobileMenuProps) {
       {/* Menu panel — slides in from right, matching index.html mobile nav */}
       <div
         className={cn(
-          'fixed top-14 right-0 bottom-0 z-35 w-72 bg-cream dark:bg-dark-bg border-l border-gray-light dark:border-dark-border',
+          'fixed top-14 right-0 bottom-0 z-[35] w-72 bg-cream dark:bg-dark-bg border-l border-gray-light dark:border-dark-border',
           'transform transition-transform duration-300 ease-out md:hidden',
           'safe-top safe-bottom overflow-y-auto',
           open ? 'translate-x-0' : 'translate-x-full'
