@@ -230,7 +230,7 @@ export interface WeMelSurveyResponse {
   userId: string
   didMeet: boolean
   interestScore: number // 1-7 Likert
-  orientation: 'short_term' | 'long_term' | null
+  orientation: 'short_term' | 'long_term' | 'not_sure' | null
   submittedAt: string
 }
 

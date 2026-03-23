@@ -23,10 +23,10 @@ export default function SurveyPage({ params }: { params: { matchId: string } }) 
 
   const [didMeet, setDidMeet] = useState<boolean | null>(null)
   const [interestScore, setInterestScore] = useState<number | null>(null)
-  const [orientation, setOrientation] = useState<'short_term' | 'long_term' | null>(null)
+  const [orientation, setOrientation] = useState<'short_term' | 'long_term' | 'not_sure' | null>(null)
   const [submitted, setSubmitted] = useState(false)
 
-  const canSubmit = didMeet !== null && (didMeet === false || (interestScore !== null && orientation !== null))
+  const canSubmit = didMeet !== null && orientation !== null && (didMeet === false || interestScore !== null)
 
   const handleSubmit = () => {
     setSubmitted(true)
@@ -127,8 +127,8 @@ export default function SurveyPage({ params }: { params: { matchId: string } }) 
           </Card>
         )}
 
-        {/* Q3: Orientation (if met and interested) */}
-        {didMeet === true && interestScore !== null && interestScore >= 4 && (
+        {/* Q3: Orientation (always shown once Q1 answered; Q2 must be answered first if they met) */}
+        {didMeet !== null && (didMeet === false || interestScore !== null) && (
           <Card className="p-5 mb-4 animate-fade-in">
             <p className="text-body-sm font-semibold text-navy dark:text-cream mb-3">
               What kind of connection are you open to?
@@ -137,6 +137,7 @@ export default function SurveyPage({ params }: { params: { matchId: string } }) 
               {[
                 { value: 'short_term' as const, label: 'Something casual', icon: '🌿' },
                 { value: 'long_term' as const, label: 'Something serious', icon: '🌳' },
+                { value: 'not_sure' as const, label: 'Not sure yet', icon: '🌱' },
               ].map(opt => (
                 <button
                   key={opt.value}

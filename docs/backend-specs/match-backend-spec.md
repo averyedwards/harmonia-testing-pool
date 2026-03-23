@@ -162,7 +162,7 @@ Returns all confirmed matches for the authenticated user.
 - Anonymous — responses not linked to the individual in downstream analysis
 - Voluntary — users can skip indefinitely
 - No reverse-engineering — aggregated only; individual responses never shown to partners
-- Q3 (orientation) only shown if interest score ≥4
+- Q3 (orientation) shown for all respondents regardless of whether they met or their interest score
 
 ### Survey Questions
 
@@ -170,9 +170,9 @@ Returns all confirmed matches for the authenticated user.
 |---|----------|-------|------|
 | 1 | Did you meet up with your match? | `did_meet` | boolean |
 | 2 | How interested are you in seeing them again? (1–7) | `interest_score` | int |
-| 3 | What kind of connection are you open to? | `orientation` | 'short_term' \| 'long_term' |
+| 3 | What kind of connection are you open to? | `orientation` | 'short_term' \| 'long_term' \| 'not_sure' |
 
-Q2 and Q3 are skipped if `did_meet = false`.
+Q2 (interest score) is skipped if `did_meet = false`. Q3 (orientation) is always shown.
 
 ---
 
@@ -185,7 +185,7 @@ CREATE TABLE we_met_surveys (
   respondent_id    UUID NOT NULL REFERENCES users(id),
   did_meet         BOOLEAN NOT NULL,
   interest_score   SMALLINT CHECK (interest_score BETWEEN 1 AND 7),
-  orientation      TEXT CHECK (orientation IN ('short_term', 'long_term')),
+  orientation      TEXT CHECK (orientation IN ('short_term', 'long_term', 'not_sure')),
   submitted_at     TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   UNIQUE (match_id, respondent_id)
 );
@@ -205,6 +205,16 @@ Submit survey response. **Idempotent** — second submission returns 200 with ex
   "didMeet": true,
   "interestScore": 6,
   "orientation": "long_term"
+}
+```
+
+When `didMeet` is false (Q2 skipped, orientation still required):
+```json
+{
+  "matchId": "match-001",
+  "didMeet": false,
+  "interestScore": null,
+  "orientation": "not_sure"
 }
 ```
 
