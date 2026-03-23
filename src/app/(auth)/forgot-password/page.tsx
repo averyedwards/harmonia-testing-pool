@@ -2,9 +2,9 @@
 
 import { useState, type FormEvent } from 'react'
 import { AuthLayout } from '@/components/auth/AuthLayout'
-import { Input } from '@/components/ui/Input'
-import { Button } from '@/components/ui/Button'
-import { useToast } from '@/components/ui/Toast'
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
+import { useToast } from '@/components/ui/toast'
 import { Mail, ArrowLeft } from 'lucide-react'
 
 export default function ForgotPasswordPage() {
