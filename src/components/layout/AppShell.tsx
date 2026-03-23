@@ -4,6 +4,7 @@ import { type ReactNode } from 'react'
 import { Nav } from './Nav'
 import { Footer } from './Footer'
 import { PWAInstallPrompt } from './PWAInstallPrompt'
+import { DevToolbar } from '@/components/dev/DevToolbar'
 
 interface AppShellProps {
   children: ReactNode
@@ -20,6 +21,7 @@ export function AppShell({ children, hideNav, hideFooter }: AppShellProps) {
       </main>
       {!hideFooter && <Footer />}
       <PWAInstallPrompt />
+      {process.env.NODE_ENV === 'development' && <DevToolbar />}
     </div>
   )
 }
