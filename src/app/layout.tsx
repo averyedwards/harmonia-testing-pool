@@ -6,7 +6,6 @@ import { AuthProvider } from '@/providers/AuthProvider'
 import { PhaseProvider } from '@/providers/PhaseProvider'
 import { NotificationsProvider } from '@/providers/NotificationsProvider'
 import { ToastProvider } from '@/components/ui/toast'
-import { AppShell } from '@/components/layout/AppShell'
 
 const cormorantGaramond = Cormorant_Garamond({
   subsets: ['latin'],
@@ -62,7 +61,7 @@ export default function RootLayout({
             <PhaseProvider>
               <NotificationsProvider>
                 <ToastProvider>
-                  <AppShell>{children}</AppShell>
+                  {children}
                 </ToastProvider>
               </NotificationsProvider>
             </PhaseProvider>

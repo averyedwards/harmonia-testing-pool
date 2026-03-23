@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { AppShell } from '@/components/layout/AppShell'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -40,6 +41,7 @@ export default function ShowcasePage() {
   const { showToast } = useToast()
 
   return (
+    <AppShell>
     <div className="max-w-4xl mx-auto py-10 px-4">
       <div className="mb-10">
         <h1 className="font-heading text-h1 text-navy dark:text-cream mb-2">Component Showcase</h1>
@@ -306,5 +308,6 @@ export default function ShowcasePage() {
         </div>
       </Section>
     </div>
+    </AppShell>
   )
 }

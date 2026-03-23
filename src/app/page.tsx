@@ -1,8 +1,10 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/hooks/useAuth'
+import { Nav } from '@/components/layout/Nav'
+import { Footer } from '@/components/layout/Footer'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 
@@ -160,7 +162,8 @@ export default function HomePage() {
   if (isLoggedIn) return null
 
   return (
-    <>
+    <div className="min-h-screen flex flex-col bg-cream dark:bg-wine-black transition-colors duration-400">
+      <Nav />
       {/* ── Hero ──────────────────────────────────────────────────────────── */}
       <section
         id="hero"
@@ -498,6 +501,8 @@ export default function HomePage() {
           </Link>
         </div>
       </section>
-    </>
+
+      <Footer />
+    </div>
   )
 }
