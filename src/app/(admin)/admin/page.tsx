@@ -164,6 +164,7 @@ export default function AdminDashboardPage() {
             { label: 'Kits', href: '/admin/kits', icon: '🧬' },
             { label: 'Export', href: '/admin/export', icon: '📊' },
             { label: 'Gemini Review', href: '/admin/gemini', icon: '🤖' },
+            { label: 'Announcements', href: '/admin/announcements', icon: '📣' },
           ].map(({ label, href, icon }) => (
             <Button
               key={label}
