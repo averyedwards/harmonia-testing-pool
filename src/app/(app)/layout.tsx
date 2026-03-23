@@ -12,17 +12,17 @@ import { AppShell } from '@/components/layout/AppShell'
  * - Guards all app routes: unauthenticated users are redirected to /login
  */
 export default function AppLayout({ children }: { children: React.ReactNode }) {
-  const { isLoggedIn } = useAuth()
+  const { isLoggedIn, isHydrated } = useAuth()
   const router = useRouter()
 
   useEffect(() => {
-    if (!isLoggedIn) {
+    if (isHydrated && !isLoggedIn) {
       router.replace('/login')
     }
-  }, [isLoggedIn, router])
+  }, [isLoggedIn, isHydrated, router])
 
-  // Render nothing while redirect is in flight (avoids auth flash)
-  if (!isLoggedIn) return null
+  // Wait for hydration so sessionStorage-restored auth state is applied first
+  if (!isHydrated || !isLoggedIn) return null
 
   return <AppShell>{children}</AppShell>
 }

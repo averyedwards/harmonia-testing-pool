@@ -13,19 +13,20 @@ import { AppShell } from '@/components/layout/AppShell'
  * - Individual admin pages also perform their own isAdmin check as defence-in-depth
  */
 export default function AdminGroupLayout({ children }: { children: React.ReactNode }) {
-  const { isLoggedIn, isAdmin } = useAuth()
+  const { isLoggedIn, isAdmin, isHydrated } = useAuth()
   const router = useRouter()
 
   useEffect(() => {
+    if (!isHydrated) return
     if (!isLoggedIn) {
       router.replace('/login')
     } else if (!isAdmin) {
       router.replace('/dashboard')
     }
-  }, [isLoggedIn, isAdmin, router])
+  }, [isLoggedIn, isAdmin, isHydrated, router])
 
-  // Render nothing while redirect is in flight (avoids auth flash)
-  if (!isLoggedIn || !isAdmin) return null
+  // Wait for hydration so sessionStorage-restored role is applied before gating
+  if (!isHydrated || !isLoggedIn || !isAdmin) return null
 
   return <AppShell>{children}</AppShell>
 }

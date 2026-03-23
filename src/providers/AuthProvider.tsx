@@ -1,12 +1,15 @@
 'use client'
 
-import { createContext, useState, useCallback, type ReactNode } from 'react'
+import { createContext, useState, useCallback, useEffect, type ReactNode } from 'react'
 import type { User, UserRole } from '@/types'
+
+const DEV_ROLE_KEY = 'harmonia_dev_role'
 
 interface AuthContextValue {
   user: User | null
   isLoggedIn: boolean
   isAdmin: boolean
+  isHydrated: boolean // true after client-side sessionStorage restore completes
   login: (role?: UserRole) => void
   logout: () => void
   updateUser: (updates: Partial<User>) => void
@@ -48,19 +51,32 @@ export const AuthContext = createContext<AuthContextValue>({
   user: null,
   isLoggedIn: false,
   isAdmin: false,
+  isHydrated: false,
   login: () => {},
   logout: () => {},
   updateUser: () => {},
 })
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(MOCK_USER) // logged in by default for dev
+  // Always start with MOCK_USER to match server HTML, then apply persisted role
+  const [user, setUser] = useState<User | null>(MOCK_USER)
+  const [isHydrated, setIsHydrated] = useState(false)
+
+  // Restore dev role from sessionStorage after hydration (client-only)
+  useEffect(() => {
+    const saved = sessionStorage.getItem(DEV_ROLE_KEY)
+    if (saved === 'admin') setUser(MOCK_ADMIN)
+    setIsHydrated(true)
+  }, [])
 
   const login = useCallback((role: UserRole = 'user') => {
-    setUser(role === 'admin' ? MOCK_ADMIN : MOCK_USER)
+    const next = role === 'admin' ? MOCK_ADMIN : MOCK_USER
+    sessionStorage.setItem(DEV_ROLE_KEY, role)
+    setUser(next)
   }, [])
 
   const logout = useCallback(() => {
+    sessionStorage.removeItem(DEV_ROLE_KEY)
     setUser(null)
   }, [])
 
@@ -74,6 +90,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         user,
         isLoggedIn: user !== null,
         isAdmin: user?.role === 'admin',
+        isHydrated,
         login,
         logout,
         updateUser,
