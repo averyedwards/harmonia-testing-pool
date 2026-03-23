@@ -68,14 +68,15 @@ export function Nav() {
           </button>
 
           {/* Notification bell */}
-          <button
+          <a
+            href="/notifications"
             className="touch-target flex items-center justify-center text-slate hover:text-gold transition-colors relative"
             aria-label="Notifications"
           >
             <Bell size={18} />
             {/* Unread indicator dot */}
             <span className="absolute top-1 right-1 w-2 h-2 bg-gold rounded-full" />
-          </button>
+          </a>
 
           {/* User avatar — desktop */}
           {user && (
