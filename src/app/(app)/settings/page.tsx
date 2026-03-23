@@ -97,8 +97,8 @@ export default function SettingsPage() {
                 <p className="text-caption text-slate">Currently: {theme}</p>
               </div>
               <Toggle
-                enabled={theme === 'dark'}
-                onChange={enabled => setTheme(enabled ? 'dark' : 'light')}
+                checked={theme === 'dark'}
+                onChange={checked => setTheme(checked ? 'dark' : 'light')}
               />
             </div>
           </Card>
@@ -112,14 +112,14 @@ export default function SettingsPage() {
                 <p className="text-body-sm font-medium text-navy dark:text-cream">Email notifications</p>
                 <p className="text-caption text-slate">Phase updates, match confirmations</p>
               </div>
-              <Toggle enabled={emailNotifs} onChange={setEmailNotifs} />
+              <Toggle checked={emailNotifs} onChange={setEmailNotifs} />
             </div>
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-body-sm font-medium text-navy dark:text-cream">Push notifications</p>
                 <p className="text-caption text-slate">In-app alerts</p>
               </div>
-              <Toggle enabled={pushNotifs} onChange={setPushNotifs} />
+              <Toggle checked={pushNotifs} onChange={setPushNotifs} />
             </div>
           </Card>
         </Section>
@@ -152,7 +152,7 @@ export default function SettingsPage() {
                 <p className="text-body-sm font-medium text-navy dark:text-cream">Dev mode</p>
                 <p className="text-caption text-slate">Phase switcher & debug overlays</p>
               </div>
-              <Toggle enabled={devMode.enabled} onChange={toggleDevMode} />
+              <Toggle checked={devMode.enabled} onChange={() => toggleDevMode()} />
             </div>
             {devMode.enabled && (
               <div className="pt-3 border-t border-gray-light dark:border-dark-border space-y-2">

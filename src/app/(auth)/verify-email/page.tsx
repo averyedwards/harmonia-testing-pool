@@ -3,9 +3,9 @@
 import { useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { AuthLayout } from '@/components/auth/AuthLayout'
-import { Button } from '@/components/ui/Button'
+import { Button } from '@/components/ui/button'
 import { useAuth } from '@/hooks/useAuth'
-import { useToast } from '@/components/ui/Toast'
+import { useToast } from '@/components/ui/toast'
 import { Mail, CheckCircle } from 'lucide-react'
 
 export default function VerifyEmailPage() {

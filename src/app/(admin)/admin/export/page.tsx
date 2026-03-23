@@ -101,7 +101,7 @@ export default function AdminExportPage() {
             <p className="text-body-sm font-medium text-navy dark:text-cream">Anonymise user IDs</p>
             <p className="text-caption text-slate">Replace user IDs with pseudonymous hashes</p>
           </div>
-          <Toggle enabled={anonymise} onChange={setAnonymise} />
+          <Toggle checked={anonymise} onChange={setAnonymise} />
         </Card>
 
         {/* Dataset selection */}

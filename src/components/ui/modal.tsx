@@ -7,11 +7,12 @@ interface ModalProps {
   open: boolean
   onClose: () => void
   children: ReactNode
+  title?: ReactNode
   className?: string
   closable?: boolean // can be dismissed by clicking backdrop or pressing Escape
 }
 
-export function Modal({ open, onClose, children, className, closable = true }: ModalProps) {
+export function Modal({ open, onClose, children, title, className, closable = true }: ModalProps) {
   const handleEscape = useCallback(
     (e: KeyboardEvent) => {
       if (e.key === 'Escape' && closable) onClose()
@@ -47,6 +48,9 @@ export function Modal({ open, onClose, children, className, closable = true }: M
           className
         )}
       >
+        {title && (
+          <h2 className="font-heading text-h3 text-navy dark:text-cream mb-4">{title}</h2>
+        )}
         {children}
       </div>
     </div>

@@ -7,7 +7,6 @@ import { Button } from '@/components/ui/button'
 import { useToast } from '@/components/ui/toast'
 import { cn } from '@/lib/utils'
 import matchesData from '@/mock-data/matches.json'
-import type { Match } from '@/types'
 
 // Candidate display names (matches mock data userBIds)
 const CANDIDATE_NAMES: Record<string, string> = {
@@ -103,7 +102,7 @@ export default function SurveyPage() {
   const { showToast } = useToast()
 
   const matchId = searchParams.get('matchId') ?? matchesData[0]?.matchId
-  const match = (matchesData as Match[]).find(m => m.matchId === matchId)
+  const match = matchesData.find(m => m.matchId === matchId)
 
   const candidateName = match ? (CANDIDATE_NAMES[match.userBId] ?? 'your match') : 'your match'
   const candidateAvatar = match ? (CANDIDATE_AVATARS[match.userBId] ?? '/placeholders/avatar-m-20s-1.svg') : '/placeholders/avatar-m-20s-1.svg'

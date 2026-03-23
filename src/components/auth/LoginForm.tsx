@@ -2,9 +2,9 @@
 
 import { useState, type FormEvent } from 'react'
 import { useAuth } from '@/hooks/useAuth'
-import { Input } from '@/components/ui/Input'
-import { Button } from '@/components/ui/Button'
-import { useToast } from '@/components/ui/Toast'
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
+import { useToast } from '@/components/ui/toast'
 
 /**
  * LoginForm

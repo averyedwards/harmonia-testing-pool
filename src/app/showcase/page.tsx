@@ -106,7 +106,7 @@ export default function ShowcasePage() {
             <Textarea
               label="Your answer"
               value={textValue}
-              onChange={setTextValue}
+              onChange={e => setTextValue(e.target.value)}
               placeholder="Start typing your response..."
               minWords={25}
               maxWords={150}
@@ -240,12 +240,12 @@ export default function ShowcasePage() {
       <Section title="Toggles">
         <Row label="On / Off states">
           <Toggle
-            enabled={toggleA}
+            checked={toggleA}
             onChange={setToggleA}
             label="Email notifications"
           />
           <Toggle
-            enabled={toggleB}
+            checked={toggleB}
             onChange={setToggleB}
             label="Push notifications"
           />

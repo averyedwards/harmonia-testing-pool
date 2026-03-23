@@ -46,7 +46,7 @@ export function ContactExchange({ matchDisplayName, onSubmit }: ContactExchangeP
             : 'Contact shared!'}
         </p>
         <p className="text-body-sm text-slate">
-          {selectedType !== 'prefer_not_to_share'
+          {selectedType !== null && selectedType !== 'prefer_not_to_share'
             ? `We'll let ${matchDisplayName} know you've shared your ${CONTACT_TYPE_LABELS[selectedType].toLowerCase()}.`
             : `You can always come back and share your contact details when you're ready.`}
         </p>

@@ -51,7 +51,6 @@ export default function Phase1InsightsPage() {
           <p className="text-caption text-gold uppercase tracking-wide mb-3">Rating distribution</p>
           <RatingDistributionChart
             distribution={calibrationStats.ratingDistribution as Record<string, number>}
-            totalRated={calibrationStats.totalFacesRated}
           />
         </Card>
 
