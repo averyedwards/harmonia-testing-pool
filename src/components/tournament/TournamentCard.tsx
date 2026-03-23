@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils'
 import { HeartDisplay } from './HeartDisplay'
 import { PersonalityReveal } from './PersonalityReveal'
 import { GeneticsIndicator } from './GeneticsIndicator'
+import { ChemistryReveal } from './ChemistryReveal'
 import type { TournamentCandidateLocal } from '@/hooks/useTournament'
 
 type CardState = 'default' | 'selected' | 'not_selected'
@@ -14,6 +15,7 @@ interface TournamentCardProps {
   state: CardState
   onSelect: () => void
   showGenetics?: boolean
+  isPhase3?: boolean
   className?: string
 }
 
@@ -37,26 +39,37 @@ export function TournamentCard({
   state,
   onSelect,
   showGenetics = false,
+  isPhase3 = false,
   className,
 }: TournamentCardProps) {
   const [revealOpen, setRevealOpen] = useState(false)
+  const [chemistryOpen, setChemistryOpen] = useState(false)
 
   const isSelected = state === 'selected'
   const isNotSelected = state === 'not_selected'
+
+  const canShowChemistry =
+    isPhase3 &&
+    showGenetics &&
+    candidate.hlaDisplayTier &&
+    candidate.hlaDisplayTier !== 'hidden' &&
+    candidate.hlaScore !== null
 
   return (
     <div
       className={cn(
         'relative rounded-card overflow-hidden cursor-pointer select-none',
         'transition-all duration-300',
-        // aspect: approximately 4:5
         'w-full',
         isSelected && 'ring-2 ring-gold shadow-gold-glow scale-[1.02]',
         isNotSelected && 'opacity-50 scale-[0.98]',
         !isSelected && !isNotSelected && 'hover:shadow-card-hover hover:-translate-y-0.5',
         className,
       )}
-      onClick={onSelect}
+      onClick={() => {
+        if (revealOpen || chemistryOpen) return
+        onSelect()
+      }}
     >
       {/* Photo area */}
       <div className="relative" style={{ aspectRatio: '4/5' }}>
@@ -72,10 +85,25 @@ export function TournamentCard({
         {/* Genetics indicator — top right */}
         {showGenetics && candidate.hlaDisplayTier && candidate.hlaDisplayTier !== 'hidden' && (
           <div className="absolute top-3 right-3">
-            <GeneticsIndicator
-              hlaScore={candidate.hlaScore}
-              hlaDisplayTier={candidate.hlaDisplayTier}
-            />
+            {canShowChemistry ? (
+              <button
+                aria-label="View chemistry details"
+                onClick={e => {
+                  e.stopPropagation()
+                  setChemistryOpen(true)
+                }}
+              >
+                <GeneticsIndicator
+                  hlaScore={candidate.hlaScore}
+                  hlaDisplayTier={candidate.hlaDisplayTier}
+                />
+              </button>
+            ) : (
+              <GeneticsIndicator
+                hlaScore={candidate.hlaScore}
+                hlaDisplayTier={candidate.hlaDisplayTier}
+              />
+            )}
           </div>
         )}
 
@@ -117,6 +145,14 @@ export function TournamentCard({
           open={revealOpen}
           onClose={() => setRevealOpen(false)}
         />
+
+        {/* Chemistry reveal overlay — conditionally mounted, Phase 3 only */}
+        {chemistryOpen && canShowChemistry && (
+          <ChemistryReveal
+            candidate={candidate}
+            onClose={() => setChemistryOpen(false)}
+          />
+        )}
       </div>
     </div>
   )

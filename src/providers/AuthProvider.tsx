@@ -13,6 +13,7 @@ interface AuthContextValue {
   login: (role?: UserRole) => void
   logout: () => void
   updateUser: (updates: Partial<User>) => void
+  setUserOverrides: (overrides: Partial<User>) => void
 }
 
 // Mock user matching our mock-data/users.json first entry
@@ -55,6 +56,7 @@ export const AuthContext = createContext<AuthContextValue>({
   login: () => {},
   logout: () => {},
   updateUser: () => {},
+  setUserOverrides: () => {},
 })
 
 export function AuthProvider({ children }: { children: ReactNode }) {
@@ -84,6 +86,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(prev => prev ? { ...prev, ...updates } : null)
   }, [])
 
+  const setUserOverrides = useCallback((overrides: Partial<User>) => {
+    setUser(prev => prev ? { ...prev, ...overrides } : null)
+  }, [])
+
   return (
     <AuthContext.Provider
       value={{
@@ -94,6 +100,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         login,
         logout,
         updateUser,
+        setUserOverrides,
       }}
     >
       {children}

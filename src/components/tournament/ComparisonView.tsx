@@ -13,6 +13,7 @@ interface ComparisonViewProps {
   onSelect: (winnerId: string) => void
   onPassBoth: (explanation: string) => void
   showGenetics?: boolean
+  isPhase3?: boolean
 }
 
 export function ComparisonView({
@@ -21,6 +22,7 @@ export function ComparisonView({
   onSelect,
   onPassBoth,
   showGenetics = false,
+  isPhase3 = false,
 }: ComparisonViewProps) {
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const [passModalOpen, setPassModalOpen] = useState(false)
@@ -62,12 +64,14 @@ export function ComparisonView({
             state={getCardState(pairing.candidateA.id)}
             onSelect={() => handleCardClick(pairing.candidateA.id)}
             showGenetics={showGenetics}
+            isPhase3={isPhase3}
           />
           <TournamentCard
             candidate={pairing.candidateB}
             state={getCardState(pairing.candidateB.id)}
             onSelect={() => handleCardClick(pairing.candidateB.id)}
             showGenetics={showGenetics}
+            isPhase3={isPhase3}
           />
         </div>
 

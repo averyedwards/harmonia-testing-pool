@@ -165,6 +165,7 @@ export default function TournamentPhase3Page() {
             onSelect={selectWinner}
             onPassBoth={passBoth}
             showGenetics={true}
+            isPhase3={true}
           />
         )}
       </div>
