@@ -1,6 +1,7 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useCallback } from 'react'
+import { X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Badge } from '@/components/ui/badge'
 import { SIMILARITY_TIERS } from '@/lib/constants'
@@ -38,6 +39,7 @@ interface PersonalityRevealProps {
   open: boolean
   onClose: () => void
   onViewStart?: () => void
+  onViewDuration?: (ms: number) => void // Fix E1
   className?: string
 }
 
@@ -46,16 +48,41 @@ export function PersonalityReveal({
   open,
   onClose,
   onViewStart,
+  onViewDuration,
   className,
 }: PersonalityRevealProps) {
   const viewStartRef = useRef<number | null>(null)
+  const reportedRef = useRef(false) // Fix E2
+  const closeRef = useRef<HTMLButtonElement>(null) // Fix F3
 
+  // Fix E3 — reset reportedRef on open; Fix F3 — auto-focus X button
   useEffect(() => {
     if (open) {
       viewStartRef.current = Date.now()
+      reportedRef.current = false
+      closeRef.current?.focus()
       onViewStart?.()
     }
   }, [open, onViewStart])
+
+  // Fix E4 — handleClose reports duration with reportedRef guard
+  const handleClose = useCallback(() => {
+    if (!reportedRef.current && viewStartRef.current) {
+      reportedRef.current = true
+      onViewDuration?.(Date.now() - viewStartRef.current)
+    }
+    onClose()
+  }, [onClose, onViewDuration])
+
+  // Fix E6 — Escape key handler
+  useEffect(() => {
+    if (!open) return
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') handleClose()
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [open, handleClose])
 
   const { perceivedSimilarity: ps } = candidate
   const tierConfig = SIMILARITY_TIERS[ps.tier]
@@ -71,13 +98,12 @@ export function PersonalityReveal({
 
   return (
     <>
-      {/* Backdrop */}
+      {/* Fix F1 — backdrop removed; close via X button or Escape only */}
       <div
         className={cn(
           'absolute inset-0 bg-wine-black/60 z-20 transition-opacity duration-300',
           open ? 'opacity-100' : 'opacity-0 pointer-events-none',
         )}
-        onClick={onClose}
       />
 
       {/* Panel — slides up from bottom of card */}
@@ -92,12 +118,20 @@ export function PersonalityReveal({
         {/* Handle */}
         <div className="w-8 h-1 bg-dark-border rounded-full mx-auto mb-3" />
 
-        {/* Headline + badge */}
+        {/* Fix F2 — headline + badge + X close button */}
         <div className="flex items-center gap-2 mb-3">
           <p className="text-body-sm font-semibold text-cream">{ps.headline}</p>
           <Badge variant={tierBadgeVariant[ps.tier] ?? 'phase'}>
             {ps.overlapCount}/7 traits
           </Badge>
+          <button
+            ref={closeRef}
+            onClick={handleClose}
+            className="ml-auto p-1 text-slate hover:text-cream transition-colors"
+            aria-label="Close personality view"
+          >
+            <X size={16} />
+          </button>
         </div>
 
         {/* Shared traits */}
@@ -119,14 +153,6 @@ export function PersonalityReveal({
           />
           <RadarLegend />
         </div>
-
-        {/* Close hint */}
-        <button
-          onClick={onClose}
-          className="w-full text-caption text-slate text-center pt-1 hover:text-gold transition-colors"
-        >
-          Tap anywhere to close
-        </button>
       </div>
     </>
   )

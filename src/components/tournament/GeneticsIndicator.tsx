@@ -49,7 +49,7 @@ export function GeneticsIndicator({
         className={cn('font-medium', isExpanded ? 'text-caption' : 'text-[10px]')}
         style={{ color: tierConfig.color }}
       >
-        {isExpanded ? `${hlaScore}% signal` : tierConfig.label}
+        {tierConfig.label}
       </span>
     </div>
   )

@@ -1,26 +1,26 @@
 'use client'
 
 import { useEffect, useRef, useCallback } from 'react'
-import { Dna } from 'lucide-react'
+import { Dna, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { GeneticsIndicator } from './GeneticsIndicator'
 import type { TournamentCandidateLocal } from '@/hooks/useTournament'
 
-// Warm, accessible copy — no genetics jargon
+// Fix A — spec-compliant tier copy
 const TIER_COPY = {
   strong: {
-    headline: 'Strong biological chemistry',
-    body: 'Your immune system profiles are highly complementary — a strong indicator of natural attraction and long-term compatibility.',
+    headline: 'Exceptional chemistry',
+    body: 'Your chemistry is off the charts. Your genetic profiles complement each other in ways that go beyond the visible.',
     accent: '#4CAF50',
   },
   good: {
-    headline: 'Good chemistry signal',
-    body: 'A meaningful overlap in immune genetics — the kind of subtle pull you might not be able to put your finger on, but your body notices.',
+    headline: 'Good chemistry',
+    body: 'Good chemistry here. Your genetic profiles have meaningful compatibility that could enhance your connection.',
     accent: '#FF9800',
   },
   some: {
-    headline: 'Some chemistry detected',
-    body: 'A degree of biological compatibility. Every connection is multifaceted, and genetics is just one layer of many.',
+    headline: 'Some chemistry',
+    body: 'Some chemistry detected. Genetic compatibility is just one piece of the puzzle. Visual attraction and personality often matter more in the early stages of connection.',
     accent: '#9E9E9E',
   },
 } as const
@@ -40,6 +40,7 @@ export function ChemistryReveal({
 }: ChemistryRevealProps) {
   const openTimeRef = useRef<number>(Date.now())
   const reportedRef = useRef<boolean>(false)
+  const closeRef = useRef<HTMLButtonElement>(null) // Fix C4 — auto-focus ref
 
   const handleClose = useCallback(() => {
     if (!reportedRef.current) {
@@ -52,6 +53,7 @@ export function ChemistryReveal({
   // Track open time; report duration on unmount if close button wasn't used
   useEffect(() => {
     openTimeRef.current = Date.now()
+    closeRef.current?.focus() // Fix C4 — auto-focus X button on mount
     return () => {
       if (!reportedRef.current) {
         reportedRef.current = true
@@ -76,16 +78,12 @@ export function ChemistryReveal({
 
   const tierCfg = TIER_COPY[hlaDisplayTier as keyof typeof TIER_COPY]
 
-  // Bar fills proportionally within the visible range (25–100)
-  const barPct = Math.min(100, Math.max(0, ((hlaScore - 25) / 75) * 100))
+  // Fix B — raw score as bar percentage (38 → 38% width)
+  const barPct = Math.min(100, Math.max(0, hlaScore))
 
   return (
     <>
-      {/* Backdrop */}
-      <div
-        className="absolute inset-0 bg-wine-black/60 z-20"
-        onClick={handleClose}
-      />
+      {/* Fix C2 — backdrop removed; close via X button or Escape only */}
 
       {/* Panel — slides up on mount via animate-slide-up */}
       <div
@@ -98,10 +96,18 @@ export function ChemistryReveal({
         {/* Handle */}
         <div className="w-8 h-1 bg-dark-border rounded-full mx-auto mb-3" />
 
-        {/* Header row */}
+        {/* Fix C3 — Header row with X close button */}
         <div className="flex items-center gap-2 mb-3">
           <Dna className="w-4 h-4 flex-shrink-0" style={{ color: tierCfg.accent }} />
           <p className="text-body-sm font-semibold text-cream">{tierCfg.headline}</p>
+          <button
+            ref={closeRef}
+            onClick={handleClose}
+            className="ml-auto p-1 text-slate hover:text-cream transition-colors"
+            aria-label="Close chemistry view"
+          >
+            <X size={16} />
+          </button>
         </div>
 
         {/* Chemistry bar */}
@@ -125,15 +131,7 @@ export function ChemistryReveal({
         </div>
 
         {/* Copy */}
-        <p className="text-caption text-cream/70 mb-4">{tierCfg.body}</p>
-
-        {/* Close hint */}
-        <button
-          onClick={handleClose}
-          className="w-full text-caption text-slate text-center pt-1 hover:text-gold transition-colors"
-        >
-          Tap anywhere to close
-        </button>
+        <p className="text-caption text-cream/70">{tierCfg.body}</p>
       </div>
     </>
   )
