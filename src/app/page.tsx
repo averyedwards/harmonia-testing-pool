@@ -197,12 +197,9 @@ export default function HomePage() {
         `}</style>
 
         <div
-          className="harmonia-container relative z-10 h-full"
+          className="harmonia-container relative z-10 h-full grid grid-cols-1 md:grid-cols-[1.4fr_1fr] items-center"
           style={{
-            display: 'grid',
-            gridTemplateColumns: '1.4fr 1fr',
             gap: '3rem',
-            alignItems: 'center',
             padding: '3rem 2rem',
             minHeight: 'calc(100vh - 64px)',
           }}
