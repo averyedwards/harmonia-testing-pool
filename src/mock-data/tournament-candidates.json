@@ -198,5 +198,107 @@
         { "sin": "lust", "description": "You both think carefully before acting", "contribution": 0.11 }
       ]
     }
+  },
+  {
+    "id": "cand-009",
+    "userId": "user-015",
+    "displayName": "Aiden",
+    "age": 25,
+    "location": "London, UK",
+    "eloRating": 995,
+    "heartCount": 0,
+    "nComparisons": 0,
+    "matchConfirmed": false,
+    "hlaScore": 88,
+    "hlaDisplayTier": "strong",
+    "perceivedSimilarity": {
+      "rawScore": 0.58,
+      "adjustedScore": 0.61,
+      "tier": "good_fit",
+      "overlapCount": 4,
+      "headline": "Good personality match",
+      "sharedTraits": [
+        { "sin": "sloth", "description": "Both take a measured approach to effort", "contribution": 0.18 },
+        { "sin": "pride", "description": "Similar levels of self-assurance", "contribution": 0.15 },
+        { "sin": "envy", "description": "Neither dwells on comparison", "contribution": 0.14 },
+        { "sin": "greed", "description": "Balanced attitude toward resources", "contribution": 0.12 }
+      ]
+    }
+  },
+  {
+    "id": "cand-010",
+    "userId": "user-016",
+    "displayName": "Kai",
+    "age": 29,
+    "location": "London, UK",
+    "eloRating": 1045,
+    "heartCount": 1,
+    "nComparisons": 2,
+    "matchConfirmed": false,
+    "hlaScore": 44,
+    "hlaDisplayTier": "some",
+    "perceivedSimilarity": {
+      "rawScore": 0.72,
+      "adjustedScore": 0.74,
+      "tier": "strong_fit",
+      "overlapCount": 5,
+      "headline": "Strong personality match!",
+      "sharedTraits": [
+        { "sin": "wrath", "description": "Both handle conflict calmly", "contribution": 0.22 },
+        { "sin": "pride", "description": "Grounded sense of self", "contribution": 0.17 },
+        { "sin": "lust", "description": "Similar appetite for novelty", "contribution": 0.15 },
+        { "sin": "gluttony", "description": "Shared moderation in indulgence", "contribution": 0.12 },
+        { "sin": "sloth", "description": "Comparable drive levels", "contribution": 0.08 }
+      ]
+    }
+  },
+  {
+    "id": "cand-011",
+    "userId": "user-017",
+    "displayName": "Finn",
+    "age": 27,
+    "location": "Manchester, UK",
+    "eloRating": 1012,
+    "heartCount": 2,
+    "nComparisons": 4,
+    "matchConfirmed": false,
+    "hlaScore": null,
+    "hlaDisplayTier": null,
+    "perceivedSimilarity": {
+      "rawScore": 0.41,
+      "adjustedScore": 0.43,
+      "tier": "moderate_fit",
+      "overlapCount": 3,
+      "headline": "Some shared traits",
+      "sharedTraits": [
+        { "sin": "gluttony", "description": "Both enjoy the good things in life", "contribution": 0.16 },
+        { "sin": "envy", "description": "Neither fixates on what others have", "contribution": 0.14 },
+        { "sin": "sloth", "description": "Similar energy levels", "contribution": 0.11 }
+      ]
+    }
+  },
+  {
+    "id": "cand-012",
+    "userId": "user-018",
+    "displayName": "Oscar",
+    "age": 31,
+    "location": "London, UK",
+    "eloRating": 968,
+    "heartCount": 0,
+    "nComparisons": 1,
+    "matchConfirmed": false,
+    "hlaScore": 15,
+    "hlaDisplayTier": "hidden",
+    "perceivedSimilarity": {
+      "rawScore": 0.33,
+      "adjustedScore": 0.35,
+      "tier": "low_fit",
+      "overlapCount": 2,
+      "headline": "Different perspectives, potential spark",
+      "sharedTraits": [
+        { "sin": "wrath", "description": "Both have a direct communication style", "contribution": 0.19 },
+        { "sin": "pride", "description": "Strong but different self-concepts", "contribution": 0.14 }
+      ]
+    }
   }
 ]
