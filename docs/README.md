@@ -36,12 +36,21 @@ harmonia-testing-pool/
 │   │   ├── showcase/              # Design system showcase
 │   │   └── page.tsx               # Root redirect
 │   ├── components/
+│   │   ├── admin/                 # Admin panel components
+│   │   ├── auth/                  # Login, register, verify forms
+│   │   ├── calibration/           # Face rating components
+│   │   ├── contact/               # Contact exchange components
+│   │   ├── dashboard/             # Dashboard widgets
 │   │   ├── dev/                   # DevToolbar, DevDataActions, DevPhaseButtons, DevUserControls
+│   │   ├── genetics/              # HLA / chemistry reveal components
+│   │   ├── insights/              # Phase report components
 │   │   ├── layout/                # Nav, MobileMenu, AppShell
+│   │   ├── match/                 # Match card components
 │   │   ├── onboarding/            # Step components
+│   │   ├── tournament/            # Tournament card components
 │   │   └── ui/                    # badge, button, card, input, modal, progress, select, textarea, toast, toggle
 │   ├── hooks/                     # useTournament, usePhase, useAuth
-│   ├── lib/                       # api.ts, constants.ts, utils.ts, elo.ts
+│   ├── lib/                       # api.ts, constants.ts, utils.ts
 │   ├── mock-data/                 # JSON fixtures (see Mock Data Reference)
 │   ├── providers/                 # ThemeProvider, AuthProvider, PhaseProvider, NotificationsProvider
 │   ├── styles/
@@ -51,7 +60,7 @@ harmonia-testing-pool/
 │   ├── backend-specs/             # 11 spec files (one per backend module)
 │   ├── pending-fixes/             # Known issues and inconsistencies
 │   ├── reference/                 # Internal reference docs
-│   ├── research/                  # UX pattern research (5 docs)
+│   ├── research/                  # UX pattern research (15 docs)
 │   └── TEMPLATE-GUIDE.md          # Email template variable reference
 ├── config/
 │   ├── .env.example               # All env vars documented
@@ -303,7 +312,7 @@ The app has 7 phases. Admin triggers transitions via `/admin/phases`.
 | `phase3` | Phase 3: Genetics | Requires admin trigger AND `kit_status = results_uploaded` (backend enforced, per `genetics-backend-spec`) |
 | `complete` | Complete | All phases done |
 
-Phase is server-authoritative. `PhaseProvider` reads it from `GET /api/v1/dashboard`. Admin transitions are irreversible — no rollback endpoint is defined in the specs.
+Phase is server-authoritative. `PhaseProvider` reads it from `GET /api/v1/dashboard`. No rollback endpoint is currently defined in the specs.
 
 ---
 
@@ -312,7 +321,7 @@ Phase is server-authoritative. `PhaseProvider` reads it from `GET /api/v1/dashbo
 | File | Records | Notes |
 |------|---------|-------|
 | `users.json` | 20 | 10 London, mixed phases (10 phase2, 3 phase3, 2 phase1, 2 between_1_2, 2 onboarding, 1 complete) |
-| `tournament-candidates.json` | 12 | HLA tiers: 3 strong, 3 good, 2 some, 2 hidden, 2 null. 9 London, 3 other |
+| `tournament-candidates.json` | 12 | HLA tiers: 3 strong, 3 good, 2 some, 2 hidden, 2 null. 7 London, 5 other |
 | `dataset-faces.json` | 20 | Calibration face pool (first 5 are real testing pool users) |
 | `personality-profiles.json` | 12 | One per tournament candidate; 7-sin scores with quality rating |
 | `perceived-similarities.json` | 10 | Pre-computed similarity tiers for tournament card reveals |
@@ -338,7 +347,7 @@ Phase is server-authoritative. `PhaseProvider` reads it from `GET /api/v1/dashbo
 | `maroon` | `#722F37` | Danger states, destructive actions |
 | `wine` | `#8B3A3A` | Secondary danger, hover states |
 | `slate` | `#475569` | Body text |
-| `dark-bg` | `#1E293B` | Page background (dark mode) |
+| `dark.black` | `#12090A` | Page background (dark mode) |
 
 Dark mode is class-based (`darkMode: 'class'` in `tailwind.config.ts`). Toggle stored in `localStorage`.
 
